@@ -6,7 +6,7 @@ description: |
 author:
   - name: Mayur 
     url: https://example.com/mayur
-    affiliation: Spingapore Management University
+    affiliation: Singapore Management University
     affiliation_url: https://example.com/smu
 date: 05-22-2021
 output:
