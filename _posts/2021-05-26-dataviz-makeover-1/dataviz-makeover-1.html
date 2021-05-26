@@ -1497,14 +1497,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </nav>
 </div>
-<h1 id="critique-of-visualisation">1.0 Critique of Visualisation</h1>
+<h2 id="critique-of-visualisation">1.0 Critique of Visualisation</h2>
 <p>The original visualization can be seen below.</p>
 <center>
 <figure>
 <img src="img/1.jpg" alt="Figure 1: Initial makeover" /><figcaption aria-hidden="true">Figure 1: Initial makeover</figcaption>
 </figure>
 </center>
-<h2 id="clarity">1.1 Clarity</h2>
+<h3 id="clarity">1.1 Clarity</h3>
 <ol type="1">
 <li>The title of the graph says the merchandise trade from 2019 to 2020. But most of the sub charts have three years from 2019 to 2021. The chart corresponding to Japan has only the year 2020 mentioned in the x-axis.</li>
 <li>The y-axis scale for all the 6 different countries is not consistent. From the chart, if you see China and Japan seems to have similar export and import trend in fact Japan’s trade seems to be more than China’s but observing the y-axis scale closely reveals that China’s scale is from 0M-8M whereas Japan’s scale is only from 0M-2M. The dual axis present in the y-axis should also be in the same scale. Consistent scale should always be used when we have similar charts side by side.</li>
@@ -1513,7 +1513,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>The source of the chart is not present.</li>
 <li>Area chart is mostly preferred only to show how parts of a whole change over time. From our area chart, it is very hard to infer any insights. It is always recommended to avoid using classic area chart as it is too confusing.</li>
 </ol>
-<h2 id="aesthetics">1.2 Aesthetics</h2>
+<h3 id="aesthetics">1.2 Aesthetics</h3>
 <ol type="1">
 <li>The use of colours to distinguish exports and imports are too pale. And since most of the sub charts have those two colours overlapped, it is very hard to understand. Brighter and distinct coloration should be used.</li>
 <li>The font size of the main title for the chart is smaller than the other sub header such as country names in the chart.</li>
@@ -1521,14 +1521,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>The sub headers such as country names present in the chart are left aligned. And since there are no gridlines, at times it gets confusing.</li>
 <li>Annotations are not used to convey the key insights, leaving the reader to infer the purpose of the chart.</li>
 </ol>
-<h1 id="alternative-design">2.0 Alternative Design</h1>
+<h2 id="alternative-design">2.0 Alternative Design</h2>
 <p>The proposed design is as follows.</p>
 <center>
 <figure>
 <img src="img/2.png" alt="Figure 2: Proposed Sketch" /><figcaption aria-hidden="true">Figure 2: Proposed Sketch</figcaption>
 </figure>
 </center>
-<h2 id="clarity-1">2.1 Clarity</h2>
+<h3 id="clarity-1">2.1 Clarity</h3>
 <ol type="1">
 <li>The x-axis of all the countries has the same year range as mentioned in the main title of the chart.</li>
 <li>The area chart is replaced by stacked bar chart which gives the overall picture of the total trade happened in the corresponding year.</li>
@@ -1538,16 +1538,16 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li>Unit of measurement is clearly mentioned in the y-axis as there are different countries using different currencies.</li>
 <li>The raw data excel file has a scale of thousand dollars so all the values are multiplied by 1000 to get the actual value of exports and imports.</li>
 </ol>
-<h2 id="aesthetics-1">2.2 Aesthetics</h2>
+<h3 id="aesthetics-1">2.2 Aesthetics</h3>
 <ol type="1">
 <li>In y-axis, tick marks are used since it is in a continuous scale.</li>
 <li>Soft and natural colours are used to distinguish export and import.</li>
 <li>Gridlines are used to separate six different countries.</li>
 <li>Annotations are used to emphasize key observations.</li>
 </ol>
-<h1 id="proposed-visualisation">3.0 Proposed Visualisation</h1>
-<p>Please view the interactive visualization on <a href="https://www.linkedin.com/in/mayurapriyann/">Tableau Public here</a>.</p>
-<h1 id="step-by-step-guide">4.0 Step-by-step Guide</h1>
+<h2 id="proposed-visualisation">3.0 Proposed Visualisation</h2>
+<p>Please view the interactive visualization on <a href="https://www.linkedin.com/in/mayurapriyann/">Tableau Public</a> here.</p>
+<h2 id="step-by-step-guide">4.0 Step-by-step Guide</h2>
 <ol type="1">
 <li>Import the excel sheet(outputFile.xlsx) into Tableau Prep builder. The first five rows in the excel sheet contains non tabular data which needs to be excluded.</li>
 </ol>
@@ -1796,7 +1796,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <img src="img/35.jpg" alt="Figure 35: Final Visualization" /><figcaption aria-hidden="true">Figure 35: Final Visualization</figcaption>
 </figure>
 </center>
-<h1 id="derived-insights">5.0 Derived Insights</h1>
+<h2 id="derived-insights">5.0 Derived Insights</h2>
 <ol type="1">
 <li>Out of the top six trading partners of Singapore, Mainland China has the highest merchandise trade value of S$137.31 billion and S$136.2 billion for the year 2019 and 2020 respectively.</li>
 <li>Except Taiwan and Hong Kong, the total trade value of the remaining four countries decreased in the year 2020 from that of the previous year.</li>
@@ -1811,6 +1811,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <center>
 <font size="2"><em>This was written as part of requirements for the <a href="https://wiki.smu.edu.sg/2021t2isss608/Course_information">Visual Analytics</a> course offered by <a href="https://scis.smu.edu.sg/master-it-business">MITB</a>.</em></font size="2">
 </center>
+<div class="boxBorder">
+<p>Your text here…</p>
+</div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->

@@ -21,7 +21,7 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-# 1.0 Critique of Visualisation
+## 1.0 Critique of Visualisation
 
 The original visualization can be seen below.
 
@@ -29,7 +29,7 @@ The original visualization can be seen below.
 ![Figure 1: Initial makeover](img/1.jpg)
 
 </center>
-## 1.1 Clarity
+### 1.1 Clarity
 
 1.	The title of the graph says the merchandise trade from 2019 to 2020. But most of the sub charts have three years from 2019 to 2021. The chart corresponding to Japan has only the year 2020 mentioned in the x-axis. 
 2.	The y-axis scale for all the 6 different countries is not consistent. From the chart, if you see China and Japan seems to have similar export and import trend in fact Japan’s trade seems to be more than China’s but observing the y-axis scale closely reveals that China’s scale is from 0M-8M whereas Japan’s scale is only from 0M-2M. The dual axis present in the y-axis should also be in the same scale. Consistent scale should always be used when we have similar charts side by side.
@@ -38,7 +38,7 @@ The original visualization can be seen below.
 5.	The source of the chart is not present.
 6.	Area chart is mostly preferred only to show how parts of a whole change over time. From our area chart, it is very hard to infer any insights. It is always recommended to avoid using classic area chart as it is too confusing.
 
-## 1.2 Aesthetics
+### 1.2 Aesthetics
 
 1.	The use of colours to distinguish exports and imports are too pale. And since most of the sub charts have those two colours overlapped, it is very hard to understand. Brighter and distinct coloration should be used.
 2.	The font size of the main title for the chart is smaller than the other sub header such as country names in the chart.
@@ -46,7 +46,7 @@ The original visualization can be seen below.
 4.	The sub headers such as country names present in the chart are left aligned. And since there are no gridlines, at times it gets confusing.
 5.	Annotations are not used to convey the key insights, leaving the reader to infer the purpose of the chart.
 
-# 2.0 Alternative Design
+## 2.0 Alternative Design
 
 The proposed design is as follows.
 
@@ -54,7 +54,7 @@ The proposed design is as follows.
 ![Figure 2: Proposed Sketch](img/2.png)
 
 </center>
-## 2.1 Clarity
+### 2.1 Clarity
 
 1. The x-axis of all the countries has the same year range as mentioned in the main title of the chart. 
 2. The area chart is replaced by stacked bar chart which gives the overall picture of the total trade happened in the corresponding year.
@@ -64,18 +64,18 @@ The proposed design is as follows.
 6. Unit of measurement is clearly mentioned in the y-axis as there are different countries using different currencies.
 7. The raw data excel file has a scale of thousand dollars so all the values are multiplied by 1000 to get the actual value of exports and imports.
 
-## 2.2 Aesthetics
+### 2.2 Aesthetics
 
 1.	In y-axis, tick marks are used since it is in a continuous scale.
 2.	Soft and natural colours are used to distinguish export and import.
 3.	Gridlines are used to separate six different countries.
 4.	Annotations are used to emphasize key observations. 
 
-# 3.0 Proposed Visualisation
+## 3.0 Proposed Visualisation
 
-Please view the interactive visualization on [Tableau Public here](https://www.linkedin.com/in/mayurapriyann/).
+Please view the interactive visualization on [Tableau Public](https://www.linkedin.com/in/mayurapriyann/) here.
 
-# 4.0 Step-by-step Guide
+## 4.0 Step-by-step Guide
 
 1.	Import the excel sheet(outputFile.xlsx) into Tableau Prep builder. The first five rows in the excel sheet contains non tabular data which needs to be excluded.
 
@@ -291,7 +291,7 @@ The stacked bar chart is ready as shown below.
 ![Figure 35: Final Visualization](img/35.jpg)
 
 </center>
-# 5.0	Derived Insights
+## 5.0	Derived Insights
 
 1.	Out of the top six trading partners of Singapore, Mainland China has the highest merchandise trade value of S$137.31 billion and S$136.2 billion for the year 2019 and 2020 respectively.
 2.	Except Taiwan and Hong Kong, the total trade value of the remaining four countries decreased in the year 2020 from that of the previous year.
@@ -308,7 +308,9 @@ The stacked bar chart is ready as shown below.
 </center>
 
 
-
+<div class="boxBorder">
+Your text here...
+</div>
 
 
 
