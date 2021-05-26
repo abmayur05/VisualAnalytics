@@ -308,9 +308,7 @@ The stacked bar chart is ready as shown below.
 </center>
 
 
-<div class="boxBorder">
-Your text here...
-</div>
+
 
 
 
