@@ -251,7 +251,7 @@ The stacked bar chart is ready as shown below.
 18.	Now the ‘Total Trade’ bar chart overlaps the stacked bar chart as the dual axis are in the same scale. Since both the axis are same, hide the y-axis present towards the right as it might confuse the readers.
 
 <center>
-![Figure 29: Edit Axis](img/29.jpg){width=30%}
+![Figure 29: Edit Axis](img/29.jpg){width=40%}
 
 </center>
 19.	Click on the dropdown symbol next to ‘SUM(Total Trade (SGD)’ and change the chart type from bar to line.
