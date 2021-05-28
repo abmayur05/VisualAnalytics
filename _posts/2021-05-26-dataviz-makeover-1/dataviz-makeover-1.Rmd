@@ -31,8 +31,8 @@ The original visualization can be seen below.
 </center>
 ### 1.1 Clarity
 
-1.  The title of the chart says that the chart represents merchandise trade of the top six trading countries from 2019 to 2020. But most of the sub-charts have years ranging from 2019 to 2021. Moreover, the chart corresponding to Japan has only the year 2020 mentioned in the x-axis. In addition, the title just states the top six trading countries but whether these are the top six trading countries in the world or the top six trading countries with Singapore is not clear to the reader. 
-2.	The y-axis scale for all 6 different countries is not consistent. The chart represents China and Japan to have similar export and import trends, in-fact Japan’s trade seems to be more than that of China but having a closer look at the y-axis reveals that China’s scale is from 0M-8M whereas Japan’s scale is only from 0M-2M. So the dual-axis present in the y-axis should be synchronized with each other as they represent exports and imports of the same country.
+1.  The title of the chart says that the chart represents merchandise trade of the top six trading countries from 2019 to 2020. But most of the sub-charts have years ranging from 2019 to 2021. Moreover, the chart corresponding to Japan has only the year 2020 in its x-axis. In addition, the title just states the top six trading countries but whether these are the top six trading countries in the world or the top six trading countries with Singapore is not clear to the reader. 
+2.	The y-axis scale for all 6 different countries is not consistent. The chart represents China and Japan to have similar export and import trends, in-fact Japan’s trade seems to be more than that of China but having a closer look at the y-axis reveals that China’s scale is from 0M-8M whereas Japan’s scale is only from 0M-2M. So all axis of the countries should be consistent with each otherand also the dual-axis present in the y-axis should be synchronized as they represent exports and imports of the same country.
 3.	The x-axis is labeled as ‘Month of Period’ but the x-axis tick mark values correspond to year and not the month.
 4.	Unit of measurement is nowhere mentioned in the graph. Since there are six different countries with different currencies, it is important to mention the unit of measurement.
 5.	The source of the chart is not present.
@@ -40,7 +40,7 @@ The original visualization can be seen below.
 
 ### 1.2 Aesthetics
 
-1.	The use of colors to distinguish exports and imports is too pale. And since most of the sub-charts have those two colors overlapped, it is very hard to understand. Brighter and distinct coloration is always preferred.
+1.	The use of colors to distinguish exports and imports is too pale. And since most of the sub-charts have overlapping of the two colors, it is very hard to understand. Brighter and distinct coloration is always preferred.
 2.	The font size of the main title for the chart is smaller than the other secondary titles such as the country names in the chart.
 3.	Tick marks are not present in the y-axis. Tick marks are necessary on a continuous scale.
 4.	The secondary headers such as country names present in the chart are left-aligned. And since there are no gridlines, at times it gets confusing.
@@ -66,7 +66,7 @@ The proposed design is as follows.
 
 ### 2.2 Aesthetics
 
-1.	In the y-axis, tick marks are added since it is on a continuous scale. In addition, the tick marks were also changed to black color to make them visible to the naked eye.
+1.	In the y-axis, tick marks are added since the values are on a continuous scale. In addition, the tick marks were also changed to black color to make them visible to the naked eye.
 2.	Soft and natural colors are used to distinguish export and import.
 3.	Grid lines are used to separate six different countries.
 4.	Annotations are used to emphasize key observations. 
@@ -88,31 +88,31 @@ Please view the interactive visualization on [Tableau Public](https://www.linked
 Check the ‘Data Interpreter’ check box to handle this issue. It is designed to help identify the structure of the data in excel file and turn it into a proper format. 
 
 <center>
-![Figure 4: Data Interpreter](img/4.jpg){width=50%}
+![Figure 4: Data Interpreter](img/4.jpg){width=40%}
 
 </center>
-2.	Rename the first sheet T1 as ‘Imports’ and add the ‘Clean step’
+2.	Rename the first sheet T1 as ‘Imports’ and add the ‘Clean step’ to the flow.
 
 <center>
-![Figure 5: Clean Step](img/5.jpg){width=50%}
+![Figure 5: Clean Step](img/5.jpg){width=40%}
 
 </center>
 The data table which was cleaned by data interpreter is displayed as shown below.
 
 <center>
-![Figure 6: Table After Cleaning](img/6.jpg)
+![Figure 6: Table After Cleaning](img/6.jpg){width=90%}
 
 </center>
 
 If you can notice, the first five rows are removed and correct table header is assigned automatically.
 
-3.	The country names are listed under column ‘Variables’. But since we are interested in only the 6 countries given in the visualization, use the filter function next to the ‘Variable’ column to filter out the 6 countries.
+3.	The country names are listed under column ‘Variables’. But since we are interested in only the 6 countries given in the visualization, use the filter function next to the ‘Variables’ column to filter out the 6 countries.
 
 <center>
-![Figure 7: Filter Values Dialog Box](img/7.jpg)
+![Figure 7: Filter Values Dialog Box](img/7.jpg){width=80%}
 
 </center>
-4.	Since we are interested only in the year 2019-2020, drop all the other data range by selecting the desired date range and click ‘Remove Field’.
+4.	Since we are interested only in the year 2019-2020, drop all the other data range by selecting the desired date range and clicking on ‘Remove Field’.
 
 <center>
 ![Figure 8: Selecting Multiple Columns](img/8.jpg)
@@ -121,7 +121,7 @@ If you can notice, the first five rows are removed and correct table header is a
 
 Repeat the steps 1-4 for the second sheet T2 and rename the sheet to ‘Exports’.
 
-5.	The output table got is in wide format.  Each month date is listed as separate measure as shown below. Wide format is not suitable for analysis, hence wide format has to be transformed to long format.
+5.	The output table got is in wide format.  Each month corresponding to the year is listed as separate measure as shown below. Wide format is not suitable for analysis, hence wide format has to be transformed to long format.
 
 <center>
 ![Figure 9: Measure Values](img/9.jpg){width=20%}
@@ -129,13 +129,13 @@ Repeat the steps 1-4 for the second sheet T2 and rename the sheet to ‘Exports�
 </center>
 
 <center>
-![Figure 10: Wide Format Columns](img/10.jpg){width=75%}
+![Figure 10: Wide Format Columns](img/10.jpg){width=65%}
 
 </center>
 Hence, after clean step add pivot step to convert wide format to long format and rename the columns as shown below.
 
 <center>
-![Figure 11: Pivot Columns](img/11.jpg){width=75%}
+![Figure 11: Pivot Columns to Rows](img/11.jpg){width=70%}
 
 </center>
 
@@ -143,13 +143,13 @@ Hence, after clean step add pivot step to convert wide format to long format and
 ![Figure 12: Long Format Columns](img/12.jpg){width=50%}
 
 </center>
-6.	After pivoting and renaming the columns, both the sheets are saved into separate excel sheets namely ‘Imports.xlsx’ and ‘Export.xlsx’.
+6.	After pivoting and renaming the columns, both the sheets are saved into separate excel sheets namely ‘Imports.xlsx’ and ‘Exports.xlsx’.
 
 <center>
-![Figure 13: Final Flow Diagram](img/13.jpg){width=50%}
+![Figure 13: Final Flow Diagram](img/13.jpg){width=60%}
 
 </center>
-7.	Now import both the tables into Tableau. The pull any one of the tables to the canvas and double click on the table to open the join canvas (physical layer).
+7.	Now import both the sheets into Tableau. The pull any one of the tables to the canvas and double click on the table to open the join canvas (physical layer).
 
 <center>
 ![Figure 14: Imports Table In Tableau](img/14.jpg){width=30%}
@@ -162,16 +162,16 @@ Hence, after clean step add pivot step to convert wide format to long format and
 
 </center>
 
-As ‘Country’ and ‘Date’ column are common both the tables, we can use an inner join to join both the tables as shown in the screenshot. The final table after joining both the tables is shown below.
+As ‘Country’ and ‘Date’ columns are common to both the tables, we can use an inner join to join both the tables as shown in the screenshot. The final table after joining both the tables is shown below.
 
 <center>
-![Figure 16: Table After Inner Join](img/16.jpg)
+![Figure 16: Table After Inner Join](img/16.jpg){width=95%}
 
 </center>
-9.	Now date column and country column of any one of the tables is retained as both will have the same value. Country column is split with ‘(‘ as delimiter to retain only the country name.
+9.	Now date column and country column of any one of the tables is retained as both will have the same value. Country column is split with ‘(‘ as delimiter to retain only the country names.
 
 <center>
-![Figure 17: Custom Split](img/17.jpg){width=30%}
+![Figure 17: Custom Split](img/17.jpg){width=40%}
 
 </center>
 
@@ -179,13 +179,13 @@ Date column has data type as string. It has to be changed to date data type.
 The final table looks like below.
 
 <center>
-![Figure 18: Column After Splitting](img/18.jpg){width=70%}
+![Figure 18: Columns After Custom Split And Data Type Change](img/18.jpg){width=60%}
 
 </center>
-10.	The scale in the raw data file is in thousand dollars, so both the ‘Import Amount’ and ‘Export Amount’ are multiplied by 1000 to get the absolute value of import and export.
+10.	The scale in the raw data file is in thousand dollars, so both the ‘Import Amount’ and ‘Export Amount’ are to be multiplied by 1000 to get the actual value of imports and exports.
 
 <center>
-![Figure 19: Derived Column 1](img/19.jpg){width=50%}
+![Figure 19: Derived Column Import (SGD)](img/19.jpg){width=50%}
 
 </center>
 
@@ -194,25 +194,25 @@ The new calculated columns are named as ‘Import (SGD)’ and ‘Export (SGD)�
 11.	A calculated column ‘Total Trade (SGD)’ is obtained by summing both the ‘Import (SGD)’ and ‘Export (SGD)’.
 
 <center>
-![Figure 20: Derived Column 2](img/20.jpg){width=50%}
+![Figure 20: Derived Column Total Trade](img/20.jpg){width=50%}
 
 </center>
 12.	Drag ‘Country’ and ‘Date’ to columns pane.
 
 <center>
-![Figure 21: Columns Pane](img/21.jpg){width=50%}
+![Figure 21: Columns Pane](img/21.jpg){width=48%}
 
 </center>
 13.	Drag ‘Measure Values’ to rows pane.
 
 <center>
-![Figure 22: Rows Pane](img/22.jpg){width=50%}
+![Figure 22: Rows Pane](img/22.jpg){width=48%}
 
 </center>
 14.	‘Measure Values’ consists of 6 values as shown below.
 
 <center>
-![Figure 23: Measure Values Content](img/23.jpg){width=20%}
+![Figure 23: Measure Values Content](img/23.jpg){width=25%}
 
 </center>
 
@@ -222,10 +222,10 @@ Remove ‘CNT(Imports)’ , ‘SUM(Export Amount)’, ‘SUM(Import (Amount)’ 
 ![Figure 24: Bar Chart](img/24.jpg)
 
 </center>
-15.	Now drag and drop ‘Measure Names’ on colour icon under the ‘Marks’. Under colour icon click on ‘Edit colours’ and select the desired colours.
+15.	Now drag and drop ‘Measure Names’ on color icon under the ‘Marks’ box. Under color icon click on ‘Edit colors’ and select the desired colors.
 
 <center>
-![Figure 25: Marks Pane](img/25.jpg){width=20%}
+![Figure 25: Marks Pane](img/25.jpg){width=25%}
 
 </center>
 
@@ -238,14 +238,14 @@ The stacked bar chart is ready as shown below.
 16.	Now the derived column, ‘Total Trade (SGD)’ is dragged to column pane.
 
 <center>
-![Figure 27: Rows And Columns Pane](img/27.jpg){width=50%}
+![Figure 27: Rows And Columns Pane](img/27.jpg){width=48%}
 
 </center>
 
 17.	Right click on the ‘Total Trade’ chart’s y-axis and click on the ‘Dual Axis’.
 
 <center>
-![Figure 28: Dual Axis](img/28.jpg){width=20%}
+![Figure 28: Dual Axis](img/28.jpg){width=27%}
 
 </center>
 18.	Now the ‘Total Trade’ bar chart overlaps the stacked bar chart as the dual axis are in the same scale. Since both the axis are same, hide the y-axis present towards the right as it might confuse the readers.
@@ -260,22 +260,22 @@ The stacked bar chart is ready as shown below.
 ![Figure 30: Change Chart Type](img/30.jpg){width=20%}
 
 </center>
-20.	Now drag the ‘Total Trade (SGD)’ column onto ‘Label’ icon. Total sum of the trade corresponding to that year is displayed as value on all the bar chart.
+20.	Now drag the ‘Total Trade (SGD)’ column onto ‘Label’ icon. Total sum of the trade corresponding to that year is displayed on all the bars.
 
 <center>
-![Figure 31: Add Labels](img/31.jpg){width=20%}
+![Figure 31: Add Labels](img/31.jpg){width=25%}
 
 </center>
 21.	Click the dropdown next to ‘SUM(Total Trade (SGD))’ label and select ‘Percent Difference’ from ‘Quick Table Calculation’.
 
 <center>
-![Figure 32: Calculate Percentage Difference](img/32.jpg){width=20%}
+![Figure 32: Calculate Percentage Difference](img/32.jpg){width=40%}
 
 </center>
 22.	Click on the ‘Add Table Calculation’ and select ‘Pane (Across)’  under compute method.
 
 <center>
-![Figure 33: Add Table Calculation](img/33.jpg){width=20%}
+![Figure 33: Add Table Calculation](img/33.jpg){width=25%}
 
 </center>
 23.	Make the tick marks in the y-axis visible to naked eye since it is on a continuous scale.
@@ -283,7 +283,7 @@ The stacked bar chart is ready as shown below.
 24.	Right click on the white space in the chart and click on ‘Annotate’ to add annotations to highlight key insights.
 
 <center>
-![Figure 34: Add Annotations](img/34.jpg){width=20%}
+![Figure 34: Add Annotations](img/34.jpg){width=30%}
 
 </center>
 25.	The final chart is ready after adding title, axis labels and captions.
@@ -294,10 +294,10 @@ The stacked bar chart is ready as shown below.
 </center>
 ## 5.0	Derived Insights
 
-1.	Out of the top six trading partners of Singapore, Mainland China has the highest merchandise trade value of S$137.31 billion and S$136.2 billion for the year 2019 and 2020 respectively.
-2.	Except Taiwan and Hong Kong, the total trade value of the remaining four countries decreased in the year 2020 from that of the previous year.
-3.	 Malaysia had the steepest fall of 8.46% in total trade value in the year 2020 from that of the previous year whereas on the other hand Taiwan witnessed the highest increase of 13.04% in the total trade value from that of the previous year.
-4.	The value of import for Singapore’s trade with Hong Kong only contributes less than 8% in both the year 2019 and 2020 of the total trade. 
+1.	Out of the top six trading partners of Singapore, Mainland China has the highest merchandise trade value of S$137.31 billion and S$136.2 billion for the years 2019 and 2020 respectively.
+2.	Except for Taiwan and Hong Kong, the total trade value of the remaining four countries decreased in the year 2020 from that of the previous year.
+3.	 Malaysia had the steepest fall of 8.46% in total trade value in the year 2020 from that of the previous year whereas, on the other hand, Taiwan witnessed the highest increase of 13.04% in the total trade value from that of the previous year.
+4.	The value of import for Singapore’s trade with Hong Kong only contributes less than 8% in both the years 2019 and 2020 of the total trade. 
 
 <center>
 ![Figure 36: Final Visualization With Highlights](img/36.jpg)

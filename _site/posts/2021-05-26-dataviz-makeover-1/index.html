@@ -2126,8 +2126,8 @@ document.addEventListener('DOMContentLoaded', function() {
 </center>
 <h3 id="clarity">1.1 Clarity</h3>
 <ol type="1">
-<li>The title of the chart says that the chart represents merchandise trade of the top six trading countries from 2019 to 2020. But most of the sub-charts have years ranging from 2019 to 2021. Moreover, the chart corresponding to Japan has only the year 2020 mentioned in the x-axis. In addition, the title just states the top six trading countries but whether these are the top six trading countries in the world or the top six trading countries with Singapore is not clear to the reader.</li>
-<li>The y-axis scale for all 6 different countries is not consistent. The chart represents China and Japan to have similar export and import trends, in-fact Japan’s trade seems to be more than that of China but having a closer look at the y-axis reveals that China’s scale is from 0M-8M whereas Japan’s scale is only from 0M-2M. So the dual-axis present in the y-axis should be synchronized with each other as they represent exports and imports of the same country.</li>
+<li>The title of the chart says that the chart represents merchandise trade of the top six trading countries from 2019 to 2020. But most of the sub-charts have years ranging from 2019 to 2021. Moreover, the chart corresponding to Japan has only the year 2020 in its x-axis. In addition, the title just states the top six trading countries but whether these are the top six trading countries in the world or the top six trading countries with Singapore is not clear to the reader.</li>
+<li>The y-axis scale for all 6 different countries is not consistent. The chart represents China and Japan to have similar export and import trends, in-fact Japan’s trade seems to be more than that of China but having a closer look at the y-axis reveals that China’s scale is from 0M-8M whereas Japan’s scale is only from 0M-2M. So all axis of the countries should be consistent with each otherand also the dual-axis present in the y-axis should be synchronized as they represent exports and imports of the same country.</li>
 <li>The x-axis is labeled as ‘Month of Period’ but the x-axis tick mark values correspond to year and not the month.</li>
 <li>Unit of measurement is nowhere mentioned in the graph. Since there are six different countries with different currencies, it is important to mention the unit of measurement.</li>
 <li>The source of the chart is not present.</li>
@@ -2135,7 +2135,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ol>
 <h3 id="aesthetics">1.2 Aesthetics</h3>
 <ol type="1">
-<li>The use of colors to distinguish exports and imports is too pale. And since most of the sub-charts have those two colors overlapped, it is very hard to understand. Brighter and distinct coloration is always preferred.</li>
+<li>The use of colors to distinguish exports and imports is too pale. And since most of the sub-charts have overlapping of the two colors, it is very hard to understand. Brighter and distinct coloration is always preferred.</li>
 <li>The font size of the main title for the chart is smaller than the other secondary titles such as the country names in the chart.</li>
 <li>Tick marks are not present in the y-axis. Tick marks are necessary on a continuous scale.</li>
 <li>The secondary headers such as country names present in the chart are left-aligned. And since there are no gridlines, at times it gets confusing.</li>
@@ -2160,7 +2160,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ol>
 <h3 id="aesthetics-1">2.2 Aesthetics</h3>
 <ol type="1">
-<li>In the y-axis, tick marks are added since it is on a continuous scale. In addition, the tick marks were also changed to black color to make them visible to the naked eye.</li>
+<li>In the y-axis, tick marks are added since the values are on a continuous scale. In addition, the tick marks were also changed to black color to make them visible to the naked eye.</li>
 <li>Soft and natural colors are used to distinguish export and import.</li>
 <li>Grid lines are used to separate six different countries.</li>
 <li>Annotations are used to emphasize key observations.</li>
@@ -2180,34 +2180,34 @@ document.addEventListener('DOMContentLoaded', function() {
 <p>Check the ‘Data Interpreter’ check box to handle this issue. It is designed to help identify the structure of the data in excel file and turn it into a proper format.</p>
 <center>
 <figure>
-<img src="img/4.jpg" style="width:50.0%" alt="Figure 4: Data Interpreter" /><figcaption aria-hidden="true">Figure 4: Data Interpreter</figcaption>
+<img src="img/4.jpg" style="width:40.0%" alt="Figure 4: Data Interpreter" /><figcaption aria-hidden="true">Figure 4: Data Interpreter</figcaption>
 </figure>
 </center>
 <ol start="2" type="1">
-<li>Rename the first sheet T1 as ‘Imports’ and add the ‘Clean step’</li>
+<li>Rename the first sheet T1 as ‘Imports’ and add the ‘Clean step’ to the flow.</li>
 </ol>
 <center>
 <figure>
-<img src="img/5.jpg" style="width:50.0%" alt="Figure 5: Clean Step" /><figcaption aria-hidden="true">Figure 5: Clean Step</figcaption>
+<img src="img/5.jpg" style="width:40.0%" alt="Figure 5: Clean Step" /><figcaption aria-hidden="true">Figure 5: Clean Step</figcaption>
 </figure>
 </center>
 <p>The data table which was cleaned by data interpreter is displayed as shown below.</p>
 <center>
 <figure>
-<img src="img/6.jpg" alt="Figure 6: Table After Cleaning" /><figcaption aria-hidden="true">Figure 6: Table After Cleaning</figcaption>
+<img src="img/6.jpg" style="width:90.0%" alt="Figure 6: Table After Cleaning" /><figcaption aria-hidden="true">Figure 6: Table After Cleaning</figcaption>
 </figure>
 </center>
 <p>If you can notice, the first five rows are removed and correct table header is assigned automatically.</p>
 <ol start="3" type="1">
-<li>The country names are listed under column ‘Variables’. But since we are interested in only the 6 countries given in the visualization, use the filter function next to the ‘Variable’ column to filter out the 6 countries.</li>
+<li>The country names are listed under column ‘Variables’. But since we are interested in only the 6 countries given in the visualization, use the filter function next to the ‘Variables’ column to filter out the 6 countries.</li>
 </ol>
 <center>
 <figure>
-<img src="img/7.jpg" alt="Figure 7: Filter Values Dialog Box" /><figcaption aria-hidden="true">Figure 7: Filter Values Dialog Box</figcaption>
+<img src="img/7.jpg" style="width:80.0%" alt="Figure 7: Filter Values Dialog Box" /><figcaption aria-hidden="true">Figure 7: Filter Values Dialog Box</figcaption>
 </figure>
 </center>
 <ol start="4" type="1">
-<li>Since we are interested only in the year 2019-2020, drop all the other data range by selecting the desired date range and click ‘Remove Field’.</li>
+<li>Since we are interested only in the year 2019-2020, drop all the other data range by selecting the desired date range and clicking on ‘Remove Field’.</li>
 </ol>
 <center>
 <figure>
@@ -2216,7 +2216,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </center>
 <p>Repeat the steps 1-4 for the second sheet T2 and rename the sheet to ‘Exports’.</p>
 <ol start="5" type="1">
-<li>The output table got is in wide format. Each month date is listed as separate measure as shown below. Wide format is not suitable for analysis, hence wide format has to be transformed to long format.</li>
+<li>The output table got is in wide format. Each month corresponding to the year is listed as separate measure as shown below. Wide format is not suitable for analysis, hence wide format has to be transformed to long format.</li>
 </ol>
 <center>
 <figure>
@@ -2225,13 +2225,13 @@ document.addEventListener('DOMContentLoaded', function() {
 </center>
 <center>
 <figure>
-<img src="img/10.jpg" style="width:75.0%" alt="Figure 10: Wide Format Columns" /><figcaption aria-hidden="true">Figure 10: Wide Format Columns</figcaption>
+<img src="img/10.jpg" style="width:65.0%" alt="Figure 10: Wide Format Columns" /><figcaption aria-hidden="true">Figure 10: Wide Format Columns</figcaption>
 </figure>
 </center>
 <p>Hence, after clean step add pivot step to convert wide format to long format and rename the columns as shown below.</p>
 <center>
 <figure>
-<img src="img/11.jpg" style="width:75.0%" alt="Figure 11: Pivot Columns" /><figcaption aria-hidden="true">Figure 11: Pivot Columns</figcaption>
+<img src="img/11.jpg" style="width:70.0%" alt="Figure 11: Pivot Columns to Rows" /><figcaption aria-hidden="true">Figure 11: Pivot Columns to Rows</figcaption>
 </figure>
 </center>
 <center>
@@ -2240,15 +2240,15 @@ document.addEventListener('DOMContentLoaded', function() {
 </figure>
 </center>
 <ol start="6" type="1">
-<li>After pivoting and renaming the columns, both the sheets are saved into separate excel sheets namely ‘Imports.xlsx’ and ‘Export.xlsx’.</li>
+<li>After pivoting and renaming the columns, both the sheets are saved into separate excel sheets namely ‘Imports.xlsx’ and ‘Exports.xlsx’.</li>
 </ol>
 <center>
 <figure>
-<img src="img/13.jpg" style="width:50.0%" alt="Figure 13: Final Flow Diagram" /><figcaption aria-hidden="true">Figure 13: Final Flow Diagram</figcaption>
+<img src="img/13.jpg" style="width:60.0%" alt="Figure 13: Final Flow Diagram" /><figcaption aria-hidden="true">Figure 13: Final Flow Diagram</figcaption>
 </figure>
 </center>
 <ol start="7" type="1">
-<li>Now import both the tables into Tableau. The pull any one of the tables to the canvas and double click on the table to open the join canvas (physical layer).</li>
+<li>Now import both the sheets into Tableau. The pull any one of the tables to the canvas and double click on the table to open the join canvas (physical layer).</li>
 </ol>
 <center>
 <figure>
@@ -2263,32 +2263,32 @@ document.addEventListener('DOMContentLoaded', function() {
 <img src="img/15.jpg" alt="Figure 15: Inner Join Imports And Exports" /><figcaption aria-hidden="true">Figure 15: Inner Join Imports And Exports</figcaption>
 </figure>
 </center>
-<p>As ‘Country’ and ‘Date’ column are common both the tables, we can use an inner join to join both the tables as shown in the screenshot. The final table after joining both the tables is shown below.</p>
+<p>As ‘Country’ and ‘Date’ columns are common to both the tables, we can use an inner join to join both the tables as shown in the screenshot. The final table after joining both the tables is shown below.</p>
 <center>
 <figure>
-<img src="img/16.jpg" alt="Figure 16: Table After Inner Join" /><figcaption aria-hidden="true">Figure 16: Table After Inner Join</figcaption>
+<img src="img/16.jpg" style="width:95.0%" alt="Figure 16: Table After Inner Join" /><figcaption aria-hidden="true">Figure 16: Table After Inner Join</figcaption>
 </figure>
 </center>
 <ol start="9" type="1">
-<li>Now date column and country column of any one of the tables is retained as both will have the same value. Country column is split with ‘(‘ as delimiter to retain only the country name.</li>
+<li>Now date column and country column of any one of the tables is retained as both will have the same value. Country column is split with ‘(‘ as delimiter to retain only the country names.</li>
 </ol>
 <center>
 <figure>
-<img src="img/17.jpg" style="width:30.0%" alt="Figure 17: Custom Split" /><figcaption aria-hidden="true">Figure 17: Custom Split</figcaption>
+<img src="img/17.jpg" style="width:40.0%" alt="Figure 17: Custom Split" /><figcaption aria-hidden="true">Figure 17: Custom Split</figcaption>
 </figure>
 </center>
 <p>Date column has data type as string. It has to be changed to date data type. The final table looks like below.</p>
 <center>
 <figure>
-<img src="img/18.jpg" style="width:70.0%" alt="Figure 18: Column After Splitting" /><figcaption aria-hidden="true">Figure 18: Column After Splitting</figcaption>
+<img src="img/18.jpg" style="width:60.0%" alt="Figure 18: Columns After Custom Split And Data Type Change" /><figcaption aria-hidden="true">Figure 18: Columns After Custom Split And Data Type Change</figcaption>
 </figure>
 </center>
 <ol start="10" type="1">
-<li>The scale in the raw data file is in thousand dollars, so both the ‘Import Amount’ and ‘Export Amount’ are multiplied by 1000 to get the absolute value of import and export.</li>
+<li>The scale in the raw data file is in thousand dollars, so both the ‘Import Amount’ and ‘Export Amount’ are to be multiplied by 1000 to get the actual value of imports and exports.</li>
 </ol>
 <center>
 <figure>
-<img src="img/19.jpg" style="width:50.0%" alt="Figure 19: Derived Column 1" /><figcaption aria-hidden="true">Figure 19: Derived Column 1</figcaption>
+<img src="img/19.jpg" style="width:50.0%" alt="Figure 19: Derived Column Import (SGD)" /><figcaption aria-hidden="true">Figure 19: Derived Column Import (SGD)</figcaption>
 </figure>
 </center>
 <p>The new calculated columns are named as ‘Import (SGD)’ and ‘Export (SGD)’.</p>
@@ -2297,7 +2297,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ol>
 <center>
 <figure>
-<img src="img/20.jpg" style="width:50.0%" alt="Figure 20: Derived Column 2" /><figcaption aria-hidden="true">Figure 20: Derived Column 2</figcaption>
+<img src="img/20.jpg" style="width:50.0%" alt="Figure 20: Derived Column Total Trade" /><figcaption aria-hidden="true">Figure 20: Derived Column Total Trade</figcaption>
 </figure>
 </center>
 <ol start="12" type="1">
@@ -2305,7 +2305,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ol>
 <center>
 <figure>
-<img src="img/21.jpg" style="width:50.0%" alt="Figure 21: Columns Pane" /><figcaption aria-hidden="true">Figure 21: Columns Pane</figcaption>
+<img src="img/21.jpg" style="width:48.0%" alt="Figure 21: Columns Pane" /><figcaption aria-hidden="true">Figure 21: Columns Pane</figcaption>
 </figure>
 </center>
 <ol start="13" type="1">
@@ -2313,7 +2313,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ol>
 <center>
 <figure>
-<img src="img/22.jpg" style="width:50.0%" alt="Figure 22: Rows Pane" /><figcaption aria-hidden="true">Figure 22: Rows Pane</figcaption>
+<img src="img/22.jpg" style="width:48.0%" alt="Figure 22: Rows Pane" /><figcaption aria-hidden="true">Figure 22: Rows Pane</figcaption>
 </figure>
 </center>
 <ol start="14" type="1">
@@ -2321,7 +2321,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ol>
 <center>
 <figure>
-<img src="img/23.jpg" style="width:20.0%" alt="Figure 23: Measure Values Content" /><figcaption aria-hidden="true">Figure 23: Measure Values Content</figcaption>
+<img src="img/23.jpg" style="width:25.0%" alt="Figure 23: Measure Values Content" /><figcaption aria-hidden="true">Figure 23: Measure Values Content</figcaption>
 </figure>
 </center>
 <p>Remove ‘CNT(Imports)’ , ‘SUM(Export Amount)’, ‘SUM(Import (Amount)’ and ‘SUM(Total Trade (SGD))’ from the ‘Measure Values’ column. The chart looks like below.</p>
@@ -2331,11 +2331,11 @@ document.addEventListener('DOMContentLoaded', function() {
 </figure>
 </center>
 <ol start="15" type="1">
-<li>Now drag and drop ‘Measure Names’ on colour icon under the ‘Marks’. Under colour icon click on ‘Edit colours’ and select the desired colours.</li>
+<li>Now drag and drop ‘Measure Names’ on color icon under the ‘Marks’ box. Under color icon click on ‘Edit colors’ and select the desired colors.</li>
 </ol>
 <center>
 <figure>
-<img src="img/25.jpg" style="width:20.0%" alt="Figure 25: Marks Pane" /><figcaption aria-hidden="true">Figure 25: Marks Pane</figcaption>
+<img src="img/25.jpg" style="width:25.0%" alt="Figure 25: Marks Pane" /><figcaption aria-hidden="true">Figure 25: Marks Pane</figcaption>
 </figure>
 </center>
 <p>The stacked bar chart is ready as shown below.</p>
@@ -2349,7 +2349,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ol>
 <center>
 <figure>
-<img src="img/27.jpg" style="width:50.0%" alt="Figure 27: Rows And Columns Pane" /><figcaption aria-hidden="true">Figure 27: Rows And Columns Pane</figcaption>
+<img src="img/27.jpg" style="width:48.0%" alt="Figure 27: Rows And Columns Pane" /><figcaption aria-hidden="true">Figure 27: Rows And Columns Pane</figcaption>
 </figure>
 </center>
 <ol start="17" type="1">
@@ -2357,7 +2357,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ol>
 <center>
 <figure>
-<img src="img/28.jpg" style="width:20.0%" alt="Figure 28: Dual Axis" /><figcaption aria-hidden="true">Figure 28: Dual Axis</figcaption>
+<img src="img/28.jpg" style="width:27.0%" alt="Figure 28: Dual Axis" /><figcaption aria-hidden="true">Figure 28: Dual Axis</figcaption>
 </figure>
 </center>
 <ol start="18" type="1">
@@ -2377,11 +2377,11 @@ document.addEventListener('DOMContentLoaded', function() {
 </figure>
 </center>
 <ol start="20" type="1">
-<li>Now drag the ‘Total Trade (SGD)’ column onto ‘Label’ icon. Total sum of the trade corresponding to that year is displayed as value on all the bar chart.</li>
+<li>Now drag the ‘Total Trade (SGD)’ column onto ‘Label’ icon. Total sum of the trade corresponding to that year is displayed on all the bars.</li>
 </ol>
 <center>
 <figure>
-<img src="img/31.jpg" style="width:20.0%" alt="Figure 31: Add Labels" /><figcaption aria-hidden="true">Figure 31: Add Labels</figcaption>
+<img src="img/31.jpg" style="width:25.0%" alt="Figure 31: Add Labels" /><figcaption aria-hidden="true">Figure 31: Add Labels</figcaption>
 </figure>
 </center>
 <ol start="21" type="1">
@@ -2389,7 +2389,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ol>
 <center>
 <figure>
-<img src="img/32.jpg" style="width:20.0%" alt="Figure 32: Calculate Percentage Difference" /><figcaption aria-hidden="true">Figure 32: Calculate Percentage Difference</figcaption>
+<img src="img/32.jpg" style="width:40.0%" alt="Figure 32: Calculate Percentage Difference" /><figcaption aria-hidden="true">Figure 32: Calculate Percentage Difference</figcaption>
 </figure>
 </center>
 <ol start="22" type="1">
@@ -2397,7 +2397,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ol>
 <center>
 <figure>
-<img src="img/33.jpg" style="width:20.0%" alt="Figure 33: Add Table Calculation" /><figcaption aria-hidden="true">Figure 33: Add Table Calculation</figcaption>
+<img src="img/33.jpg" style="width:25.0%" alt="Figure 33: Add Table Calculation" /><figcaption aria-hidden="true">Figure 33: Add Table Calculation</figcaption>
 </figure>
 </center>
 <ol start="23" type="1">
@@ -2406,7 +2406,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </ol>
 <center>
 <figure>
-<img src="img/34.jpg" style="width:20.0%" alt="Figure 34: Add Annotations" /><figcaption aria-hidden="true">Figure 34: Add Annotations</figcaption>
+<img src="img/34.jpg" style="width:30.0%" alt="Figure 34: Add Annotations" /><figcaption aria-hidden="true">Figure 34: Add Annotations</figcaption>
 </figure>
 </center>
 <ol start="25" type="1">
@@ -2419,10 +2419,10 @@ document.addEventListener('DOMContentLoaded', function() {
 </center>
 <h2 id="derived-insights">5.0 Derived Insights</h2>
 <ol type="1">
-<li>Out of the top six trading partners of Singapore, Mainland China has the highest merchandise trade value of S$137.31 billion and S$136.2 billion for the year 2019 and 2020 respectively.</li>
-<li>Except Taiwan and Hong Kong, the total trade value of the remaining four countries decreased in the year 2020 from that of the previous year.</li>
-<li>Malaysia had the steepest fall of 8.46% in total trade value in the year 2020 from that of the previous year whereas on the other hand Taiwan witnessed the highest increase of 13.04% in the total trade value from that of the previous year.</li>
-<li>The value of import for Singapore’s trade with Hong Kong only contributes less than 8% in both the year 2019 and 2020 of the total trade.</li>
+<li>Out of the top six trading partners of Singapore, Mainland China has the highest merchandise trade value of S$137.31 billion and S$136.2 billion for the years 2019 and 2020 respectively.</li>
+<li>Except for Taiwan and Hong Kong, the total trade value of the remaining four countries decreased in the year 2020 from that of the previous year.</li>
+<li>Malaysia had the steepest fall of 8.46% in total trade value in the year 2020 from that of the previous year whereas, on the other hand, Taiwan witnessed the highest increase of 13.04% in the total trade value from that of the previous year.</li>
+<li>The value of import for Singapore’s trade with Hong Kong only contributes less than 8% in both the years 2019 and 2020 of the total trade.</li>
 </ol>
 <center>
 <figure>
