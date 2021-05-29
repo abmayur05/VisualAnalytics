@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = FALSE)
 The original visualisation can be seen below.
 
 <center>
-![Figure 1: Given visualization](img/1.jpg)
+![Figure 1: Given visualisation](img/1.jpg)
 
 </center>
 ### 1.1 Clarity
@@ -74,7 +74,7 @@ The proposed design is as follows.
 
 ## 3.0 Proposed Visualisation
 
-Please view the interactive visualization on [Tableau Public](https://www.linkedin.com/in/mayurapriyann/) here.
+Please view the interactive visualisation on [Tableau Public](https://www.linkedin.com/in/mayurapriyann/) here.
 
 ## 4.0 Step-by-step Guide
 
@@ -106,7 +106,7 @@ The data table which was cleaned by data interpreter is displayed as shown below
 
 If you can notice, the first five rows are removed and the correct table header is assigned automatically.
 
-3.	The country names are listed under column ‘Variables’. But since we are interested in only the 6 countries given in the visualization, use the filter function next to the ‘Variables’ column to filter out the 6 countries.
+3.	The country names are listed under column ‘Variables’. But since we are interested in only the 6 countries given in the visualisation, use the filter function next to the ‘Variables’ column to filter out the 6 countries.
 
 <center>
 ![Figure 7: Filter Values Dialog Box](img/7.jpg){width=80%}
