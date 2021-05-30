@@ -21,6 +21,17 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+```{css}
+.columns {display: flex;}
+h1 {color: MidnightBlue;}
+h2 {color: Navy;}
+h3 {color: DarkSlateBlue;}
+img{
+    border: 2px LightGrey;
+    border-style: solid
+}
+```
+
 ## 1.0 Critique of Visualisation
 
 The original visualisation can be seen below.
@@ -74,7 +85,7 @@ The proposed design is as follows.
 
 ## 3.0 Proposed Visualisation
 
-Please view the interactive visualisation on [Tableau Public](https://www.linkedin.com/in/mayurapriyann/) here.
+Please view the interactive visualisation on [Tableau Public](https://public.tableau.com/app/profile/mayur4143/viz/DataVizMakeover1_16223530559820/Dashboard1) here.
 
 ## 4.0 Step-by-step Guide
 
@@ -254,7 +265,7 @@ The stacked bar chart is ready as shown below.
 ![Figure 29: Edit Axis](img/29.jpg){width=40%}
 
 </center>
-19.	Click on the dropdown symbol next to ‘SUM(Total Trade (SGD)’ and change the chart type from bar to line.
+19.	Click on the dropdown symbol next to ‘SUM(Total Trade (SGD))’ and change the chart type from bar to line.
 
 <center>
 ![Figure 30: Change Chart Type](img/30.jpg){width=20%}

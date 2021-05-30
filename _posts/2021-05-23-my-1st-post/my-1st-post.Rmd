@@ -16,6 +16,18 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+```{css}
+.columns {display: flex;}
+h1 {color: Navy;}
+h2 {color: DarkSlateBlue;}
+img{
+    border: 1px solid grey;
+    border-style: solid
+}
+```
+
+
+
 # 1.0 Overview
 
 In this article, we will show you how to plot a figure with multiple histograms by using [**ggplot2**](https://ggplot2.tidyverse.org/) and **ggpubr** packages. 
