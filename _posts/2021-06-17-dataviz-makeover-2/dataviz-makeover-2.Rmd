@@ -106,7 +106,7 @@ Please view the interactive visualisation on [Tableau Public](https://public.tab
 3.	In the ‘Tables’ pane, there is a check box to select the ‘Data Interpreter’. Click on the check box in order to remove the unwanted data which is present in the excel file in a non-tabular format.
 
 <center>
-![Figure 5: Data Interpreter](img/5.png){width=40%}
+![Figure 5: Data Interpreter](img/5.png){width=32.5%}
 
 </center>
 4.	From the ‘Tables’ pane, drag and drop the sheets ‘T1’ and ‘T2’ in the canvas space.
@@ -118,7 +118,7 @@ Please view the interactive visualisation on [Tableau Public](https://public.tab
 5.	Once the sheets ‘T1’ and ‘T2’ are in the canvas space, click on the small ‘+’ icon displayed right next to ‘T1’ and ‘T2’ and add ‘Clean Step’ to both sheets ‘T1’ and ‘T2’.
 
 <center>
-![Figure 7: Add Clean Step Node](img/7.png){width=40%}
+![Figure 7: Add Clean Step Node](img/7.png){width=35%}
 
 </center>
 6.	Both the sheets ‘T1’ and ‘T2’ hold the data of imports and exports values respectively. Hence, rename the sheets ‘T1’ and ‘T2‘ as ‘Imports’ and ‘Exports’ respectively.
@@ -130,7 +130,7 @@ Please view the interactive visualisation on [Tableau Public](https://public.tab
 7.	By selecting the clean step node, exclude the first seven records under the ‘Variables’ column. Because the first record contains the total sum of the import/export values over all the years and the next five records have the import/export values of individual continents. And the last record which is ‘European Union’ comprises 27 countries. Since we already have the data of the individual countries present under the European Union, we exclude ‘European Union’.
 
 <center>
-![Figure 9: Exclude Records](img/9.png){width=70%}
+![Figure 9: Exclude Records](img/9.png){width=60%}
 
 </center>
 8.	As the analysis is restricted to years ranging from 2011 to 2020, all the other years that are before and after the ten-year range are excluded.
@@ -154,13 +154,13 @@ Please view the interactive visualisation on [Tableau Public](https://public.tab
 11.	The Tableau Prep automatically identifies and assigns the data type of each column present in the table. But at times it may be wrongly identified hence we have to perform a manual data type change. The recently pivoted column which contains all the dates is initially assigned with string datatype. Hence, the data type field is right-clicked and the data type is changed to date format. 
 
 <center>
-![Figure 13: Data Type Conversion](img/13.png){width=30%}
+![Figure 13: Data Type Conversion](img/13.png){width=25%}
 
 </center>
 12.	The next step after pivoting is to add the output filed and run the flow to generate the pre-processed excel sheet. Add the ‘Output’ node to both the imports and exports sheet. Run the flow to generate ‘Imports.xlsx’ and ‘Exports.xlsx’ at the desired directory.
 
 <center>
-![Figure 14: Output Flow](img/14.png){width=30%}
+![Figure 14: Output Flow](img/14.png){width=45%}
 
 </center>
 13.	Launch the Tableau application. Just drag and drop both the excel files ‘Imports.xlsx’ and ‘Exports.xlsx’ into Tableau.
@@ -202,25 +202,25 @@ Please view the interactive visualisation on [Tableau Public](https://public.tab
 19.	Create a new calculated field by adding the import and export column in the formula box and multiply it with 1000 to get the actual value.
 
 <center>
-![Figure 21: Import Column Formula](img/21.png){width=80%}
+![Figure 21: Import Column Formula](img/21.png){width=65%}
 
 </center>
 20.	Now we have the actual value of imports and exports corresponding to each country month-wise. Create a new calculated field ‘Total Trade’ to sum up both the ‘Export’ and ‘Import’ columns.
 
 <center>
-![Figure 22: Total Trade Column Formula](img/22.png){width=80%}
+![Figure 22: Total Trade Column Formula](img/22.png){width=65%}
 
 </center>
 21.	The table-level pre-processing is completed. Now open a new worksheet by clicking on the ‘New Worksheet’ icon present towards the bottom of the application.
 
 <center>
-![Figure 23: New Worksheet Icon](img/23.png){width=20%}
+![Figure 23: New Worksheet Icon](img/23.png){width=17.5%}
 
 </center>
 22.	Create a new parameter by selecting ‘Create parameter’ from the drop-down present next to the ‘Search’ bar.
 
 <center>
-![Figure 24: Create Parameter](img/24.png){width=25%}
+![Figure 24: Create Parameter](img/24.png){width=22.5%}
 
 </center>
 23.	‘Create parameter’ pop-up dialog box opens up. Create a new parameter ‘Trade Type’ with string datatype with a list consisting of Export, Import, and Total Trade for the users to select trade type of his/her interest.
@@ -232,7 +232,7 @@ Please view the interactive visualisation on [Tableau Public](https://public.tab
 24.	Click on the down arrow present to the right of the ‘Search’ bar and select ‘Create Calculated Field’ with column name as ‘Selected Trade Value’ and enter the formula as shown in the table. Drag the newly calculated field ‘Trade Type’ onto the Columns pane. 
 
 <center>
-![Figure 26: Calculated Field Formula](img/26.png){width=80%}
+![Figure 26: Calculated Field Formula](img/26.png){width=65%}
 
 </center>
 <center>
@@ -248,7 +248,7 @@ Please view the interactive visualisation on [Tableau Public](https://public.tab
 26.	Create a new calculated field ‘Dynamic Rank’ for displaying the ranks of all the countries based on selected parameters.
 
 <center>
-![Figure 29: Calculated Field Formula](img/29.png){width=80%}
+![Figure 29: Calculated Field Formula](img/29.png){width=65%}
 
 </center>
 27.	Drop the newly calculated field ‘Dynamic Rank’ onto the Rows pane.
@@ -290,13 +290,13 @@ Please view the interactive visualisation on [Tableau Public](https://public.tab
 33.	Right-click on the ‘Country’ column and select ‘Create’ followed by ‘Set’ to create a new set. Create two-country sets for the top and bottom filter respectively. So once the user inputs the desired value into the parameter, the number of countries displayed in the chart gets restricted to the user input value.
 
 <center>
-![Figure 36: Create Sets](img/36.png){width=60%}
+![Figure 36: Create Sets](img/36.png){width=55%}
 
 </center>
 34.	Create a calculated field to display the top and bottom countries as per the parameter change.
 
 <center>
-![Figure 37: Calculated Field](img/37.png){width=80%}
+![Figure 37: Calculated Field](img/37.png){width=65%}
 
 </center>
 35.	A new worksheet is opened and a basic bar graph is created by adding the ‘Date’ and ‘Measure Names’ in the Columns pane. ‘Country’ and ‘Measure Values’ are dropped in the rows field.  From the measure values, all the other column data except the exports and imports are removed since this will include only the exports and imports data in a bar chart format inside the tooltip of the previously created chart. 
@@ -312,7 +312,7 @@ Please view the interactive visualisation on [Tableau Public](https://public.tab
 36.	Add ‘Country’ and ‘Selected Trade Type’ in the labels. And in the tooltip, add the columns exports, imports, and total trade value. The chart along with the label and tooltip is displayed as shown in the screenshot. 
 
 <center>
-![Figure 40: Tooltip Flyout](img/40.png){width=70%}
+![Figure 40: Tooltip Flyout](img/40.png){width=80%}
 
 </center>
 37.	The completed visualization is shown in the screenshot.
@@ -328,19 +328,19 @@ Please view the interactive visualisation on [Tableau Public](https://public.tab
 38.	Open a new worksheet for the next visualization. The previous visualization was to explore the trading partners with respect to the trade type to find the top/bottom N countries. The next visualization is on a country-level visualization showing the year-over-year growth of the countries of the user’s choice. Firstly, Drag the column ‘Date’ to the columns pane. 
 
 <center>
-![Figure 43: Add Date in Columns Pane](img/43.png)
+![Figure 43: Add Date in Columns Pane](img/43.png){width=70%}
 
 </center>
 Add ‘Selected Trade Value’ to the Rows pane. The chart obtained is now is bar graph. Convert the bar graph into a line graph under the Marks tool box.
 
 <center>
-![Figure 44: Convert To Line Graph](img/44.png){width=30%}
+![Figure 44: Convert To Line Graph](img/44.png){width=25%}
 
 </center>
 39.	Drag and drop the ‘Country’ column onto the ‘Detail’ pane under the Marks tool box.
 
 <center>
-![Figure 45: Add Country To Detail](img/45.png){width=30%}
+![Figure 45: Add Country To Detail](img/45.png){width=25%}
 
 </center>
 40.	Click on the arrow present towards the right of the ‘Selected Trade Value’ present in the Rows pane and uncheck ‘Show header’ from the dropdown list as the value of the measure would be labeled against each data point in the line graph.
@@ -358,7 +358,7 @@ Add ‘Selected Trade Value’ to the Rows pane. The chart obtained is now is ba
 42.	Select the pane under the Marks tool box that corresponds to the newly added column and change the chart type from line to circle. In this way, only the dots remain in the graph.
 
 <center>
-![Figure 48: Create Circle Graph](img/48.png){width=25%}
+![Figure 48: Create Circle Graph](img/48.png){width=22.5%}
 
 </center>
 43.	Adjust the size of the circle to make sure it is not too big or too small. So that once the dot gets overlapped with the line graph, it doesn’t look odd.
@@ -371,13 +371,13 @@ Add ‘Selected Trade Value’ to the Rows pane. The chart obtained is now is ba
 44.	Right-click on the axis of the newly created chart with dots and click on dual-axis to merge both the charts. The two graphs which were present one over the other get clubbed together into a single graph sharing a common x-axis.
 
 <center>
-![Figure 50: Create Dual Axis](img/50.png){width=35%}
+![Figure 50: Create Dual Axis](img/50.png){width=30%}
 
 </center>
 45.	Though both the y-axis has the same scale, there might be a slight difference between them which can make dots appear separately from the line. So, right-click on any one of the axes and click on synchronize axis.
 
 <center>
-![Figure 51: Synchronize Axis](img/51.png){width=35%}
+![Figure 51: Synchronize Axis](img/51.png){width=30%}
 
 </center>
 46.	Right-click on the ‘Trade Type’ parameter which was created as a part of the first chart and click on the ‘Show Parameter’ from the dropdown to display the trade type parameter towards the right of the chart. Add ‘Date’ and ‘Country’ to the Filters pane.
@@ -389,7 +389,7 @@ Add ‘Selected Trade Value’ to the Rows pane. The chart obtained is now is ba
 47.	Right-click on the ‘Date’ and ‘Country’ columns from the Filters pane and select ‘Show Filter’ from the dropdown list. Both the filters get displayed towards the right of the worksheet.
 
 <center>
-![Figure 53: Show Filters](img/53.png){width=30%}
+![Figure 53: Show Filters](img/53.png){width=25%}
 
 </center>
 48.	‘Country’ column is added to the color pane under the Marks tool box for both the line graph and circle graph so that both are in the same color. The main reason for adding colors is to differentiate each country when the number of countries chosen by the customer exceeds the threshold which may lead to text overlap.
@@ -407,13 +407,13 @@ Add ‘Selected Trade Value’ to the Rows pane. The chart obtained is now is ba
 50.	The trade value in the graph is displayed with too many digits which may lead to ambiguity among the readers, hence right-click on the ‘Selected Trade Value’ label under the Marks toolbox and select ‘Format’.
 
 <center>
-![Figure 56: Format Tooltip](img/56.png){width=30%}
+![Figure 56: Format Tooltip](img/56.png){width=25%}
 
 </center>
 51.	Clicking on the ‘Format’ opens a new pane towards the left. Click on the ‘Numbers (Custom)’ and select display units as Billions (B) for easy readability.
 
 <center>
-![Figure 57: Change Display Units](img/57.png){width=70%}
+![Figure 57: Change Display Units](img/57.png){width=60%}
 
 </center>
 <center>
@@ -423,23 +423,23 @@ Add ‘Selected Trade Value’ to the Rows pane. The chart obtained is now is ba
 52. A new calculated field ‘Percent Of Total’ is created by dividing the sum of the ‘Selected Trade Type’ column by the total sum of ‘Selected Trade Type’.
 
 <center>
-![Figure 59: Calculated Field](img/59.png){width=80%}
+![Figure 59: Calculated Field](img/59.png){width=65%}
 
 </center>
 53.	The objective is to obtain the percentage difference between the current year to the previous year. Hence, another calculated field is created by using the newly created calculated column from the previous step.
 
 <center>
-![Figure 60: Get Percentage Difference](img/60.png){width=80%}
+![Figure 60: Get Percentage Difference](img/60.png){width=65%}
 
 </center>
 54.	Create another two calculated fields to represent if the percentage difference is positive or negative.
 
 <center>
-![Figure 61: Calculated Field](img/61.png){width=80%}
+![Figure 61: Calculated Field](img/61.png){width=65%}
 
 </center>
 <center>
-![Figure 62: Calculated Field](img/62.png){width=80%}
+![Figure 62: Calculated Field](img/62.png){width=65%}
 
 </center>
 55.	Add the newly created columns ‘Positive’ and ‘Negative’ in the Label pane from the Marks tool box to display the percentage difference in red and green color to visually indicate the trade increase/decrease.
@@ -460,3 +460,45 @@ Add ‘Selected Trade Value’ to the Rows pane. The chart obtained is now is ba
 ![Figure 65: Tooltip Content](img/65.png){width=60%}
 
 </center>
+58.	The completed visualization is shown in the screenshot.
+
+<center>
+![Figure 66: Tooltip Flyout](img/68.png)
+
+</center>
+<center>
+![Figure 67: Growth Comparision between 2011 and 2020](img/66.png)
+
+</center>
+<center>
+![Figure 68: Year-Over-Year Comaparision](img/67.png)
+
+</center>
+## 5.0	Derived Insights
+
+1. Over the ten years time period from 2011 to 2020, Hong Kong remains as the top net exporter of Singapore. The net exports reached the peak of 60.76 Billions in the year 2018 followed by a decline of 8.21% in the 2019. But the net exports has increased in the next year by 4.91% though the whole year was worst hit by COVID-19 pandemic. Followed by Hong Kong, Indonesia consistently held thee second position when it comes to net exports from 2011-2019 but drops to fourth position in the year 2020 alone.
+
+<center>
+![Figure 69: Year-Over-Year Comparision - Hong Kong](img/69.png)
+
+</center>
+2. Unlike the net exporter, the top net importer was not consistently held by a single partner for all the ten years from 2011-2020. From 2012-2017, United States was the top net importer of Singapore but from 2018-2020 Taiwan became the top net importer of Singapore.
+
+<center>
+![Figure 70: Top Net Importers - 2020](img/71.png)
+
+</center>
+3. The total trade is calculated by summing the exports and imports. By looking at the bar chart from the year 2011 to 2020 we can say that China, Malaysia, United States, Indonesia, Japan were the Singapore's key trading partners. Malaysia held the top spot for total trade in the year 2011 and 2012 but on 2013 China dethroned Malaysia to become the top trading partner. And from 2013 to 2020, Mainland China retained its top position reaching its peak in the year 2019 summing up to 137.31 Billions.
+
+<center>
+![Figure 71: Top Total Trade - 2019](img/72.png)
+
+</center>
+4. The top trading partners China, Malaysia, Indonesia, United States, and Japan are compared by the total trade value for 2011 vs 2020. It can be observed that only Mainland China and United States showed a total trade growth of 33.86% and 35.01% respectively while a declining trend is noticed for all other trading partners.
+
+<center>
+![Figure 72: Top Total Trade - 2011 vs 2020](img/73.png)
+
+</center>
+The tooltip flyout gives us the monthly imports and exports trend corresponding to the selected year. Since, circuit breaker was implemented in Singapore from April 7th most of the countries showed a declining trend around that time period.
+
