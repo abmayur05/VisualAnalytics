@@ -7,8 +7,9 @@ author:
     url: https://example.com/mayur
 date: 05-23-2021
 output:
-  distill::distill_article:
-    self_contained: false
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
 ---
 
 
