@@ -62,7 +62,11 @@ without a well-worded title, as it is one of the main components that grabs the 
 The proposed design is as follows.
 
 <center>
-![Figure 2: Proposed Sketch](img/2.png)
+![Figure 2(A): Proposed Visualization Sketch 1](img/viz1.jpg)
+
+</center>
+<center>
+![Figure 2(B): Proposed Visualization Sketch 2](img/viz2.jpg)
 
 </center>
 ### 2.1 Clarity
@@ -502,3 +506,6 @@ Add ‘Selected Trade Value’ to the Rows pane. The chart obtained is now is ba
 </center>
 The tooltip flyout gives us the monthly imports and exports trend corresponding to the selected year. Since, circuit breaker was implemented in Singapore from April 7th most of the countries showed a declining trend around that time period.
 
+<center>
+<font size="2">*This was written as part of requirements for the [Visual Analytics](https://wiki.smu.edu.sg/2021t2isss608/Course_information) course offered by [MITB](https://scis.smu.edu.sg/master-it-business).*</font size="2">
+</center>
