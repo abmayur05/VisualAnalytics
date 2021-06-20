@@ -16,7 +16,6 @@ output:
     highlight: tango
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
@@ -31,6 +30,7 @@ img{
     border-style: solid
 }
 ```
+
 
 ## 1.0 Critique of Visualization
 
