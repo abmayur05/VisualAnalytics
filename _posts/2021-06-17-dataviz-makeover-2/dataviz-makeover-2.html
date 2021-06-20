@@ -115,7 +115,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["img/1.PNG","img/10.png","img/11.png","img/12.png","img/13.png","img/14.png","img/15.png","img/16.png","img/17.png","img/18.png","img/19.png","img/20.png","img/21.png","img/22.png","img/23.png","img/24.png","img/25.png","img/26.png","img/27.png","img/28.png","img/29.png","img/3.jpg","img/30.png","img/31.png","img/32.png","img/33.png","img/34.png","img/35.png","img/36.png","img/37.png","img/38.png","img/39.png","img/4.png","img/40.png","img/41.png","img/42.png","img/43.png","img/44.png","img/45.png","img/46.png","img/47.png","img/48.png","img/49.png","img/5.png","img/50.png","img/51.png","img/52.png","img/53.png","img/54.png","img/55.png","img/56.png","img/57.png","img/58.png","img/59.png","img/6.png","img/60.png","img/61.png","img/62.png","img/63.png","img/64.png","img/65.png","img/66.PNG","img/67.PNG","img/68.PNG","img/69.PNG","img/7.png","img/70.PNG","img/71.PNG","img/72.PNG","img/73.PNG","img/74.PNG","img/8.png","img/9.png","img/viz.PNG","img/viz1.jpg","img/viz2.jpg"]}
+  {"type":"character","attributes":{},"value":["dataviz-makeover-2_files/anchor-4.2.2/anchor.min.js","dataviz-makeover-2_files/bowser-1.9.3/bowser.min.js","dataviz-makeover-2_files/distill-2.2.21/template.v2.js","dataviz-makeover-2_files/header-attrs-2.8/header-attrs.js","dataviz-makeover-2_files/jquery-1.11.3/jquery.min.js","dataviz-makeover-2_files/popper-2.6.0/popper.min.js","dataviz-makeover-2_files/tippy-6.2.7/tippy-bundle.umd.min.js","dataviz-makeover-2_files/tippy-6.2.7/tippy-light-border.css","dataviz-makeover-2_files/tippy-6.2.7/tippy.css","dataviz-makeover-2_files/tippy-6.2.7/tippy.umd.min.js","dataviz-makeover-2_files/webcomponents-2.0.0/webcomponents.js","img/1.PNG","img/10.png","img/11.png","img/12.png","img/13.png","img/14.png","img/15.png","img/16.png","img/17.png","img/18.png","img/19.png","img/20.png","img/21.png","img/22.png","img/23.png","img/24.png","img/25.png","img/26.png","img/27.png","img/28.png","img/29.png","img/3.jpg","img/30.png","img/31.png","img/32.png","img/33.png","img/34.png","img/35.png","img/36.png","img/37.png","img/38.png","img/39.png","img/4.png","img/40.png","img/41.png","img/42.png","img/43.png","img/44.png","img/45.png","img/46.png","img/47.png","img/48.png","img/49.png","img/5.png","img/50.png","img/51.png","img/52.png","img/53.png","img/54.png","img/55.png","img/56.png","img/57.png","img/58.png","img/59.png","img/6.png","img/60.png","img/61.png","img/62.png","img/63.png","img/64.png","img/65.png","img/66.PNG","img/67.PNG","img/68.PNG","img/69.PNG","img/7.png","img/70.PNG","img/71.PNG","img/72.PNG","img/73.PNG","img/74.PNG","img/8.png","img/9.png","img/last.PNG","img/viz.PNG","img/viz1.jpg","img/viz2.jpg"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1520,17 +1520,18 @@ img{
 <ol type="1">
 <li>The title of the graph is not present. An enlightening data visualization will be incomplete without a well-worded title, as it is one of the main components that grabs the attention of the people. Effective titles can reduce the mental effort of the readers and at the same time convey the intended goal of the visualization.</li>
 <li>Both the axis has values ranging from 0 to 80 rightly representing exports and imports respectively but if we look at the graph, few values labeled against each country exceed the value in the x-axis and y-axis scales. Though it may represent the summation of exports and imports, it lacks clarity from the readers’ point of view as it is hard to interpret the export/import values.</li>
-<li>Key performance measures of the two countries discussed below the visualization chart but since there is no information on the year for which the data has been visualized, it is very hard to relate.</li>
+<li>Key performance measures of the two countries are discussed below the visualization chart but since there is no information on the year for which the data has been visualized, it is very hard to relate. In-addition the description present below the graph presents the findings from the year 2009 and 2006 but the actual year of the graph is not clearly stated.</li>
 <li>Though the x-axis and y-axis are labeled as exports and imports, the placement of the x-axis and y-axis labels are inappropriate which can possibly lead the reader to misinterpret easily.</li>
 <li>European Union which is composed of 27 countries is present in the chart. But, those countries are also present individually in the chart leading to biased comparison.</li>
+<li>The size of the bubble graph represents the total trade of each country, but the order of the rank is not very obvious. Also the value of exports and imports are also not present.</li>
 </ol>
 <h3 id="aesthetics">1.2 Aesthetics</h3>
 <ol type="1">
 <li>The circles used to represent individual countries overlap each other making it difficult to interpret the size of the circle. Also, the names corresponding to each circle don’t follow a uniform alignment.</li>
 <li>The x-axis and y-axis are on a continuous scale but tick marks are not present.</li>
 <li>Absence of gridlines makes it even harder to map the x-axis and y-axis values to the center of the circle.</li>
-<li>Similar colors are used for representing European Union and Thailand.</li>
-<li>Annotations and tooltips are not efficiently used.</li>
+<li>Similar colors are used for representing few of the countries making it ambiguous to interpret. The labeled values present on Mainland China and Hong Kong extends a bit out of the axis scale.</li>
+<li>Annotations and tooltips are not efficiently used to provide some additional information to the readers.</li>
 </ol>
 <h2 id="alternative-design">2.0 Alternative Design</h2>
 <p>The proposed design is as follows.</p>
@@ -1548,7 +1549,7 @@ img{
 <ol type="1">
 <li>Title plays one of the key roles in grabbing the attention of the readers hence an appropriate chart title is given to the chart. Since the proposed dashboard has two visualizations, the main title is accompanied by caption to set the context for understanding the visualizations.</li>
 <li>The original chart is limited to only the top 10 trading partners by overall trade for the year 2020. But the proposed chart is highly customizable by users as the users will have the ability to choose the year, trade type, top n, and bottom n countries. Hence it gives the user a wide variety of options to explore and compare as per their wish.</li>
-<li>The parameter change is dynamically aligned with the title and each entity has been labeled respectively. Additional information such as import/export/total trade was put under one roof inside the tooltip.</li>
+<li>The parameter change is dynamically aligned with the title and each entity has been labeled respectively. Additional information such as import/export/total trade was put under one roof inside the tooltip for easy comparison.</li>
 <li>Extended version of the slope chart is presented for the user to pick the countries of their wish and compare year-over-year growth of the trade. Trade growth increase/decrease corresponding to the previous year is represented by labels.</li>
 <li>In the slope chart presented, the monthly trend of import/export fluctuations was also included in the tooltip. The monthly trend gives added advantage to zoom in closely to look into any particular month and check how imports and exports have been affected by any historically significant event.</li>
 <li>A simple bar chart is used to list the top/bottom N countries by trade type. The slope chart on the right gives a detailed summary of the trend over 10 years. Since the selection of years is customizable the user can compare and contrast even for two or more years.</li>
@@ -2083,7 +2084,7 @@ img{
 </center>
 <h2 id="derived-insights">5.0 Derived Insights</h2>
 <ol type="1">
-<li>Over the ten years time period from 2011 to 2020, Hong Kong remains as the top net exporter of Singapore. The net exports reached the peak of $60.76 Billions in the year 2018 followed by a decline of 8.21% in the 2019. But the net exports has increased in the next year by 4.91% though the whole year was worst hit by COVID-19 pandemic. Followed by Hong Kong, Indonesia consistently held the second position when it comes to net exports from 2011-2019 but dropped to fourth position in the year 2020 alone.</li>
+<li>Over the ten years time period from 2011 to 2020, Hong Kong remains as the top net exporter of Singapore. The net exports reached the peak of $60.76 Billions in the year 2018 followed by a decline of 8.21% in the 2019. But the net exports has increased in the year 2020 by 4.91% though the whole year was worst hit by COVID-19 pandemic. Followed by Hong Kong, Indonesia consistently held the second position when it comes to net exports from 2011-2019 but dropped to fourth position in the year 2020 alone.</li>
 </ol>
 <center>
 <figure>
@@ -2091,7 +2092,7 @@ img{
 </figure>
 </center>
 <ol start="2" type="1">
-<li>Unlike the net exporter, the top net importer was not consistently held by a single partner for all the ten years from 2011-2020. From 2012-2017, United States was the top net importer of Singapore but from 2018-2020 Taiwan became the top net importer of Singapore.</li>
+<li>Unlike the net exporter, the top net importer was not consistently held by a single country for all the ten years from 2011-2020. From 2012-2017, United States was the top net importer of Singapore but from 2018-2020 Taiwan became the top net importer of Singapore.</li>
 </ol>
 <center>
 <figure>
@@ -2099,19 +2100,27 @@ img{
 </figure>
 </center>
 <ol start="3" type="1">
-<li>The total trade is calculated by summing the exports and imports. By looking at the bar chart from the year 2011 to 2020 we can say that China, Malaysia, United States, Indonesia, Japan were the Singapore’s key trading partners. Malaysia held the top spot for total trade in the year 2011 and 2012 but in 2013 China dethroned Malaysia to become the top trading partner of Singapore. And from 2013 to 2020, Mainland China retained its top position reaching its peak in the year 2019 with the total trade value of $137.31 Billions.</li>
+<li>The total trade is calculated by summing the exports and imports. By looking at the bar chart from the year 2011 to 2020 we can say that China, Malaysia, United States, Indonesia, Japan were the Singapore’s key trading partners. Malaysia held the top spot for total trade in the year 2011 and 2012 but in 2013 China dethroned Malaysia to become the top trading partner of Singapore. And from 2013 to 2020, China retained its top position reaching its peak in the year 2019 with the total trade value of $137.31 Billions.</li>
 </ol>
 <center>
 <figure>
-<img src="img/72.PNG" alt="Figure 73: Top Total Trade - 2019" /><figcaption aria-hidden="true">Figure 73: Top Total Trade - 2019</figcaption>
+<img src="img/72.PNG" alt="Figure 73: Top 10 Total Trade - 2019" /><figcaption aria-hidden="true">Figure 73: Top 10 Total Trade - 2019</figcaption>
 </figure>
 </center>
 <ol start="4" type="1">
+<li>The sum of total trades for the respective years are present in the bottom of the dashboard. The overall trade value for the year 2011 was 943.1 Billions (Exports: 488.7 Billions &amp; Imports: 454.5 Billions) and for the year 2020 was 939.4 Billions (Exports: 498.7 Billions &amp; Imports: 440.7 Billions). From these figures, it can be inferred that the overall trade value was reduced by 0.39% whereas the exports value increased by 2% and imports value dropped by 3.03%. The balance of trade has shown major rise of 69.29% in the year 2020 (57.9 Billions) with that of the year 2011 (34.2 Billions).</li>
+</ol>
+<center>
+<figure>
+<img src="img/last.PNG" style="width:40.0%" alt="Figure 74: Trade Values - 2020" /><figcaption aria-hidden="true">Figure 74: Trade Values - 2020</figcaption>
+</figure>
+</center>
+<ol start="5" type="1">
 <li>The top trading partners China, Malaysia, Indonesia, United States, and Japan are compared by the total trade value for 2011 vs 2020. It can be observed that only Mainland China and United States showed a total trade growth of 33.86% and 35.01% respectively while a declining trend is noticed for all other trading partners.</li>
 </ol>
 <center>
 <figure>
-<img src="img/73.PNG" alt="Figure 74: Top Total Trade - 2011 vs 2020" /><figcaption aria-hidden="true">Figure 74: Top Total Trade - 2011 vs 2020</figcaption>
+<img src="img/73.PNG" alt="Figure 75: Total Trades - 2011 vs 2020" /><figcaption aria-hidden="true">Figure 75: Total Trades - 2011 vs 2020</figcaption>
 </figure>
 </center>
 <p>The tooltip flyout gives us the monthly imports and exports trend corresponding to the selected year. Since, circuit breaker was implemented in Singapore from April 7th most of the countries showed a declining trend around that time period.</p>
