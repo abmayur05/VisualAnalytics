@@ -1,23 +1,254 @@
 ---
 title: "In-class Exercise 7"
 description: |
-  A short description of the post.
+  This post presents the step by step instructions that were followed to achieve the corresponding visualizations in Session 7 of our Visual Analytics Module.
 author:
   - name: Mayurapriyann Arulmozhi Baskaran
     url: https://www.linkedin.com/in/mayurapriyann/
-date: 07-04-2021
+date: 06-26-2021
 output:
   distill::distill_article:
     self_contained: false
+    toc: true
+    toc_float: true
+    smooth_scroll: true
+    theme: united
+    highlight: tango
 ---
 
-
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, error = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+## Installing and Launching R Packages
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
 
+```{r }
+packages = c('DT','ggiraph','plotly','tidyverse')
+
+for(p in packages){
+  if(!require(p, character.only = T)){
+    install.packages(p)
+  }
+  library(p, character.only = T)
+}
+```
+
+## Importing Data
+
+```{r }
+exam_data <- read_csv("C:/Users/Mayur//Documents/SMU/Sem3/Visual Analytics/Session7/In-class_Ex07/data/Exam_data.csv")
+```
+
+
+## Bar Plot
+
+```{r }
+ggplot(data = exam_data, aes(x = RACE)) +
+  geom_bar()
+```
+
+## Dot Plot
+
+```{r }
+ggplot(data = exam_data, aes(x = MATHS)) +
+  geom_dotplot(binwidth = 2.5,dotsize = 0.5) +
+  scale_y_continuous(NULL, breaks = NULL)
+```
+
+
+## Dot Plot (colored by RACE)
+
+```{r }
+ggplot(data = exam_data, aes(x = MATHS, fill = RACE)) +
+  geom_dotplot(binwidth = 2.5,dotsize = 0.5) +
+  scale_y_continuous(NULL, breaks = NULL)
+```
+
+# Histogram
+
+```{r }
+ggplot(data = exam_data, aes(x = MATHS)) +
+  geom_histogram(bins = 20, color = "black", fill = "light blue")
+```
+
+## Histogram (colored by GENDER)
+
+```{r }
+ggplot(data = exam_data, aes(x = MATHS, fill = GENDER)) +
+  geom_histogram(bins = 20, color = "grey30")
+```
+
+## Box plot with jitter
+
+```{r }
+ggplot(data = exam_data,
+       aes(y = MATHS,
+           x = GENDER)) +
+  geom_boxplot() +
+  geom_point(position="jitter",
+             size = 0.5)
+```
+
+
+## Interactive Plots (with tooltip)
+
+```{r }
+p <- ggplot(data = exam_data,
+        aes(x = MATHS)) +
+    geom_dotplot_interactive(
+      aes(tooltip = ID),
+      stackgroups = TRUE,
+      binwidth = 1,
+      method = "histodot") +
+    scale_y_continuous(NULL, breaks = NULL)
+girafe(
+  ggobj = p,
+  width_svg = 6,
+  height_svg = 6*0.618
+)
+```
+
+## Interactive Plots (hover effect with data_id aesthetic)
+
+```{r }
+p <- ggplot(data = exam_data,
+        aes(x = MATHS)) +
+    geom_dotplot_interactive(
+      aes(data_id = CLASS),
+      stackgroups = TRUE,
+      binwidth = 1,
+      method = "histodot") +
+    scale_y_continuous(NULL, breaks = NULL)
+girafe(
+  ggobj = p,
+  width_svg = 6,
+  height_svg = 6*0.618
+)
+```
+
+
+## Interactive Plots (hover effect with data_id aesthetic with tooltip)
+
+```{r }
+p <- ggplot(data = exam_data,
+        aes(x = MATHS)) +
+    geom_dotplot_interactive(
+      aes(data_id = CLASS, 
+          tooltip = CLASS),
+      stackgroups = TRUE,
+      binwidth = 1,
+      method = "histodot") +
+    scale_y_continuous(NULL, breaks = NULL)
+girafe(
+  ggobj = p,
+  width_svg = 6,
+  height_svg = 6*0.618
+)
+```
+## Interactive Plots (onclick)
+
+```{r }
+exam_data$onclick <- sprintf("window.open(\"%s%s\")",
+"https://www.moe.gov.sg/schoolfinder?journey=Primary%20school", as.character(exam_data$ID) )
+
+p <- ggplot(data = exam_data,
+        aes(x = MATHS)) +
+    geom_dotplot_interactive(
+      aes(onclick = onclick),
+      stackgroups = TRUE,
+      binwidth = 1,
+      method = "histodot") +
+    scale_y_continuous(NULL, breaks = NULL)
+girafe(
+  ggobj = p,
+  width_svg = 6,
+  height_svg = 6*0.618
+)
+``` 
+
+# Interactive visualization using plotly
+
+```{r }
+plot_ly(data = exam_data,
+        x = ~ENGLISH,
+        y = ~MATHS,
+        color = ~RACE
+        )
+
+```
+
+# Customising the colours
+
+```{r }
+pal <- c("red","blue","green","purple")
+
+plot_ly(data = exam_data,
+        x = ~ENGLISH,
+        y = ~MATHS,
+        color = ~RACE,
+        colors = pal
+        )
+
+```
+
+# Customising layout
+
+```{r }
+plot_ly(data = exam_data,
+        x = ~ENGLISH,
+        y = ~MATHS,
+        text = ~paste("Student ID:", ID,
+                      "<br>Class:", CLASS),
+        color = ~RACE,
+        colors = "Set1") %>%
+layout(title = "English Score Versus Maths Score",
+       xaxis = list(range = c(0,100)),
+       yaxis = list(range = c(0,100)))
+
+```
+
+# Coordinated Multiple Views With Plotly
+
+```{r }
+d <- highlight_key(exam_data)
+p1 <- ggplot(data = d,
+             aes(x=MATHS,
+                 y=ENGLISH)) +
+  geom_point(size=1) +
+  coord_cartesian(xlim=c(0,100),
+                  ylim=c(0,100))
+p2 <- ggplot(data = d,
+             aes(x=MATHS,
+                 y=SCIENCE)) +
+  geom_point(size=1) +
+  coord_cartesian(xlim=c(0,100),
+                  ylim=c(0,100))
+subplot(ggplotly(p1),
+        ggplotly(p2))
+
+```
+
+# Interactive datatable
+
+```{r }
+DT::datatable(exam_data)
+```
+
+# Linked brushing: crosstalk method
+
+```{r }
+d <- highlight_key(exam_data)
+p <- ggplot(d,
+            aes(ENGLISH,
+                MATHS)) +
+  geom_point(size=1) +
+  coord_cartesian(xlim=c(0,100),
+                  ylim=c(0,100))
+gg <- highlight(ggplotly(p),
+                "plotly_selected")
+crosstalk::bscols(gg,
+                  DT::datatable(d),
+                  widths=5)
+```
 
