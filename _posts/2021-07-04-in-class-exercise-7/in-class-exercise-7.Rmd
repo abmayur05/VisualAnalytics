@@ -20,6 +20,7 @@ output:
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, error = FALSE)
 ```
 
+
 ## Installing and Launching R Packages
 
 
@@ -79,7 +80,7 @@ ggplot(data = exam_data, aes(x = MATHS, fill = GENDER)) +
   geom_histogram(bins = 20, color = "grey30")
 ```
 
-## Box plot with jitter
+# Box plot with jitter
 
 ```{r }
 ggplot(data = exam_data,
@@ -91,7 +92,7 @@ ggplot(data = exam_data,
 ```
 
 
-## Interactive Plots (with tooltip)
+# Interactive Plots (with tooltip)
 
 ```{r }
 p <- ggplot(data = exam_data,
@@ -178,7 +179,7 @@ plot_ly(data = exam_data,
 
 ```
 
-# Customising the colours
+## Customising the colours
 
 ```{r }
 pal <- c("red","blue","green","purple")
@@ -192,7 +193,7 @@ plot_ly(data = exam_data,
 
 ```
 
-# Customising layout
+## Customising layout
 
 ```{r }
 plot_ly(data = exam_data,
@@ -208,7 +209,7 @@ layout(title = "English Score Versus Maths Score",
 
 ```
 
-# Coordinated Multiple Views With Plotly
+## Coordinated Multiple Views With Plotly
 
 ```{r }
 d <- highlight_key(exam_data)
@@ -229,13 +230,13 @@ subplot(ggplotly(p1),
 
 ```
 
-# Interactive datatable
+## Interactive datatable
 
 ```{r }
 DT::datatable(exam_data)
 ```
 
-# Linked brushing: crosstalk method
+## Linked brushing: crosstalk method
 
 ```{r }
 d <- highlight_key(exam_data)
