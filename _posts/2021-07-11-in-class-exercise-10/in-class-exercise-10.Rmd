@@ -1,0 +1,76 @@
+---
+title: "In-class Exercise 10"
+description: |
+  This post presents the step by step instructions that were followed to achieve the corresponding visualizations in Session 10 of our Visual Analytics Module.
+author:
+  - name: Mayurapriyann Arulmozhi Baskaran
+    url: https://www.linkedin.com/in/mayurapriyann/
+date: 07-11-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_float: true
+    smooth_scroll: true
+    theme: united
+    highlight: tango
+---
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(fig.retina = 3, 
+                      echo = TRUE, 
+                      eval = TRUE,
+                      message = FALSE, 
+                      error = FALSE, 
+                      warning=FALSE)
+```
+
+```{r}
+packages = c('tidytext','widyr','wordcloud','DT','ggwordcloud',
+             'textplot','lubridate','dplyr','hms','tidyverse','tidygraph',
+             'ggraph','igraph')
+
+for(p in packages){
+  if(!require(p, character.only = T)){
+    install.packages(p)
+  }
+  library(p, character.only = T)
+}
+```
+# Creating a folder list
+
+```{r}
+news20 <- "C:/Users/Mayur/Documents/SMU/Sem3/Visual Analytics/Session10/In-class_Ex_10/data/20news/"
+```
+
+# Read all files from folder into a dataframe
+
+```{r}
+read_folder <- function(infolder) {
+  tibble(file = dir(infolder,
+                    full.names = TRUE)) %>%
+    mutate(text = map(file,
+                      read_lines)) %>%
+    transmute(id = basename(file),
+              text) %>%
+    unnest(text)
+}
+```
+
+# Reading all the messages from the 20news folder
+
+```{r}
+raw_text <- tibble(folder=
+                     dir(news20,
+                         full.names = TRUE)) %>%
+  mutate(folder_out = map(folder,
+                          read_folder)) %>%
+  unnest(cols = c(folder_out)) %>%
+  transmute(newsgroup = basename(folder),
+            id, text)
+write_rds(raw_text, "C:/Users/Mayur/Documents/SMU/Sem3/Visual Analytics/Session10/In-class_Ex_10/data/rds/news20.rds")
+```
+
+

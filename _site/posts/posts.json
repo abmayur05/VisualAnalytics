@@ -17,6 +17,23 @@
     "input_file": {}
   },
   {
+    "path": "posts/2021-07-11-in-class-exercise-10/",
+    "title": "In-class Exercise 10",
+    "description": "This post presents the step by step instructions that were followed to achieve the corresponding visualizations in Session 10 of our Visual Analytics Module.",
+    "author": [
+      {
+        "name": "Mayurapriyann Arulmozhi Baskaran",
+        "url": "https://www.linkedin.com/in/mayurapriyann/"
+      }
+    ],
+    "date": "2021-07-11",
+    "categories": [],
+    "contents": "\r\n\r\n\r\npackages = c('tidytext','widyr','wordcloud','DT','ggwordcloud',\r\n             'textplot','lubridate','dplyr','hms','tidyverse','tidygraph',\r\n             'ggraph','igraph')\r\n\r\nfor(p in packages){\r\n  if(!require(p, character.only = T)){\r\n    install.packages(p)\r\n  }\r\n  library(p, character.only = T)\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-07-11T14:18:47+08:00",
+    "input_file": "in-class-exercise-10.knit.md"
+  },
+  {
     "path": "posts/2021-07-04-in-class-exercise-8/",
     "title": "In-class Exercise 8",
     "description": "This post presents the step by step instructions that were followed to achieve the corresponding visualizations in Session 8 of our Visual Analytics Module.",
