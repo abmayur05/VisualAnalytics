@@ -102,6 +102,33 @@ cc <- read_csv(file = 'data/cc_data.csv')
 lc <- read_csv(file = 'data/loyalty_data.csv')
 ```
 
+**Importing raster file**
+
+```{r }
+bgmap <- raster("data/MC2-tourist.tif")
+bgmap
+```
+
+**Importing vector GIS data file**
+ 
+```{r }
+Abila_st <- st_read(dsn = "data/Geospatial",
+                    layer = "Abila")
+```
+
+**Importing Aspatial Data**
+
+```{r }
+gps <- read_csv("data/gps.csv")
+glimpse(gps)
+```
+
+Below csv file holding the car id, name, department, employee designation are loaded into a dataframe.
+
+```{r}
+net <- read_csv(file = 'data/car-assignments.csv')
+```
+
 *Renaming foreign characters*
 
 A single value under the location column has a non-english character hence replacing the foreign character with alternative english character.
