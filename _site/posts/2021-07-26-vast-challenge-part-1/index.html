@@ -2104,7 +2104,10 @@ document.addEventListener('DOMContentLoaded', function() {
 <li><a href="#overview">Overview</a></li>
 <li><a href="#objective">Objective</a></li>
 <li><a href="#literature-review">Literature review</a></li>
-<li><a href="#building-the-visualization">Building the visualization</a></li>
+<li><a href="#building-the-visualization">Building the visualization</a>
+<ul>
+<li><a href="#task-1">Task 1</a></li>
+</ul></li>
 </ul>
 </nav>
 </div>
@@ -2124,6 +2127,28 @@ document.addEventListener('DOMContentLoaded', function() {
 <li>In the submission by the University of Buenos Aires, a heat map is used to visualize the credit card data per hour with sequential colors to find out the abnormalities, though it is visually appealing to find the abnormalities, the exact number of transactions cannot be got from the plot. This issue can be overcome by adding interactivity to the heat map so that the count of the transactions can be known via tooltips just hovering the cursor over the specific points.</li>
 </ol>
 <h1 id="building-the-visualization">Building the visualization</h1>
+<h2 id="task-1">Task 1</h2>
+<p><strong>Using just the credit and loyalty card data, identify the most popular locations, and when they are popular. What anomalies do you see? What corrections would you recommend to correct these anomalies?</strong></p>
+<p>All the data extraction, wrangling and preparing the input data required to perform the analysis are done in R using appropriate packages.</p>
+<p><em>Setting up the environment</em></p>
+<p>Firstly, it is important to install the necessary R packages and launch them into R Studio environment. The below code chunk checks for the available packages and installs those packages that are not available. In-addition to that, all those packages will be launched into RStudio environment.</p>
+<p>raster - To read, write, manipulate, analyze, model spatial data <br> sf - To support simple features and encode spatial vector data <br> tmap - To visualize spatial data distributions <br> tidyverse - A opinionated collection of R packages for data science <br> clock - Provides a comprehensive library for date-time manipulations <br> rgdal - Works on both raster and vector data types for manipulating geospatial data <br> tidytext - Makes text mining tasks easier, more effective and consistent <br> widyr - To widen the matrix, perform some processing, then turn back to tidy form <br> DT - To render data objects as HTML tables using JavaScript library <br> dplyr - A fast, consistent tool for working with data frame like objects <br> hms - To store and format time-of-day values <br> ggraph - An extension of ggplot2 for graph and network visualizations<br> igraph - For simple graphs and network analysis <br> crosstalk - To support linked brushing and filtering <br> plotly - To create interactive web graphics and custom interface <br> data.table - To handle data sets in R <br> stringi - For fast, correct, consistent, and convenient string/text manipulation <br> mapview - To create interactive visualizations of spatial data <br> ggridges - Used for visualizing changes in distributions over time <br> networkD3 - To create interactive network graphs with JavaScript <br> htmlwidgets - A framework for creating HTML widgets in R console <br></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>packages</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'raster'</span>,<span class='st'>'sf'</span>,<span class='st'>'tmap'</span>,<span class='st'>'tidyverse'</span>,<span class='st'>'clock'</span>,<span class='st'>'rgdal'</span>,<span class='st'>'tidytext'</span>,<span class='st'>'widyr'</span>,
+             <span class='st'>'DT'</span>,<span class='st'>'dplyr'</span>,<span class='st'>'hms'</span>,<span class='st'>'ggraph'</span>,<span class='st'>'igraph'</span>,<span class='st'>'crosstalk'</span>,
+             <span class='st'>'plotly'</span>,<span class='st'>'data.table'</span>,<span class='st'>'stringi'</span>,<span class='st'>'mapview'</span>,<span class='st'>'ggridges'</span>,<span class='st'>'networkD3'</span>,
+             <span class='st'>'htmlwidgets'</span><span class='op'>)</span>
+
+<span class='kw'>for</span><span class='op'>(</span><span class='va'>p</span> <span class='kw'>in</span> <span class='va'>packages</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='kw'>if</span><span class='op'>(</span><span class='op'>!</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'>p</span>, character.only <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+    <span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+  <span class='op'>}</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>p</span>, character.only <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
