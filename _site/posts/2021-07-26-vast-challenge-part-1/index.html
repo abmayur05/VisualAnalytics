@@ -116,7 +116,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["vast-challenge-part-1_files/anchor-4.2.2/anchor.min.js","vast-challenge-part-1_files/bowser-1.9.3/bowser.min.js","vast-challenge-part-1_files/distill-2.2.21/template.v2.js","vast-challenge-part-1_files/header-attrs-2.8/header-attrs.js","vast-challenge-part-1_files/jquery-1.11.3/jquery.min.js","vast-challenge-part-1_files/popper-2.6.0/popper.min.js","vast-challenge-part-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","vast-challenge-part-1_files/tippy-6.2.7/tippy-light-border.css","vast-challenge-part-1_files/tippy-6.2.7/tippy.css","vast-challenge-part-1_files/tippy-6.2.7/tippy.umd.min.js","vast-challenge-part-1_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["1.JPG","data/AnswerSheet/VAST Challenge 2021 MC2 Answer Sheet.htm","data/AnswerSheet/VAST Challenge 2021 MC2 Answer Sheet_files/colorschememapping.xml","data/AnswerSheet/VAST Challenge 2021 MC2 Answer Sheet_files/filelist.xml","data/AnswerSheet/VAST Challenge 2021 MC2 Answer Sheet_files/themedata.thmx","data/car-assignments.csv","data/cc_data.csv","data/Geospatial/Abila.dbf","data/Geospatial/Abila.kml","data/Geospatial/Abila.prj","data/Geospatial/Abila.sbn","data/Geospatial/Abila.sbx","data/Geospatial/Abila.shp","data/Geospatial/Abila.shx","data/Geospatial/Kronos Island.kmz","data/Geospatial/Kronos_Island.dbf","data/Geospatial/Kronos_Island.prj","data/Geospatial/Kronos_Island.sbn","data/Geospatial/Kronos_Island.sbx","data/Geospatial/Kronos_Island.shp","data/Geospatial/Kronos_Island.shx","data/gps.csv","data/loyalty_data.csv","data/MC2-tourist.jpg","data/MC2-tourist.tif","data/MC2_data_readme.docx","vast-challenge-part-1_files/anchor-4.2.2/anchor.min.js","vast-challenge-part-1_files/bowser-1.9.3/bowser.min.js","vast-challenge-part-1_files/distill-2.2.21/template.v2.js","vast-challenge-part-1_files/header-attrs-2.8/header-attrs.js","vast-challenge-part-1_files/jquery-1.11.3/jquery.min.js","vast-challenge-part-1_files/popper-2.6.0/popper.min.js","vast-challenge-part-1_files/tippy-6.2.7/tippy-bundle.umd.min.js","vast-challenge-part-1_files/tippy-6.2.7/tippy-light-border.css","vast-challenge-part-1_files/tippy-6.2.7/tippy.css","vast-challenge-part-1_files/tippy-6.2.7/tippy.umd.min.js","vast-challenge-part-1_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2149,7 +2149,109 @@ document.addEventListener('DOMContentLoaded', function() {
 </code></pre>
 </div>
 </div>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p><em>Reading the credit card and loyalty card details</em></p>
+<p>Importing credit card and loyalty card details into two separate data frames.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>cc</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv</span><span class='op'>(</span>file <span class='op'>=</span> <span class='st'>'data/cc_data.csv'</span><span class='op'>)</span>
+
+<span class='va'>lc</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv</span><span class='op'>(</span>file <span class='op'>=</span> <span class='st'>'data/loyalty_data.csv'</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p><em>Renaming foreign characters</em></p>
+<p>A single value under the location column has a non-english character hence replacing the foreign character with alternative english character.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>setDT</span><span class='op'>(</span><span class='va'>cc</span><span class='op'>)</span><span class='op'>[</span><span class='va'>location</span> <span class='op'>%like%</span> <span class='st'>"^Katerina"</span>, <span class='va'>location</span> <span class='op'>:=</span> <span class='st'>"Katerina's Cafe"</span><span class='op'>]</span>
+<span class='fu'>setDT</span><span class='op'>(</span><span class='va'>lc</span><span class='op'>)</span><span class='op'>[</span><span class='va'>location</span> <span class='op'>%like%</span> <span class='st'>"^Katerina"</span>, <span class='va'>location</span> <span class='op'>:=</span> <span class='st'>"Katerina's Cafe"</span><span class='op'>]</span>
+</code></pre>
+</div>
+</div>
+<p>View the columns of the dataset and their respective attributes.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>cc</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 1,490
+Columns: 4
+$ timestamp  &lt;chr&gt; &quot;01/06/2014 07:28&quot;, &quot;01/06/2014 07:34&quot;, &quot;01/06/20~
+$ location   &lt;chr&gt; &quot;Brew&#39;ve Been Served&quot;, &quot;Hallowed Grounds&quot;, &quot;Brew&#39;~
+$ price      &lt;dbl&gt; 11.34, 52.22, 8.33, 16.72, 4.24, 4.17, 28.73, 9.6~
+$ last4ccnum &lt;dbl&gt; 4795, 7108, 6816, 9617, 7384, 5368, 7253, 4948, 9~</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>lc</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 1,392
+Columns: 4
+$ timestamp  &lt;chr&gt; &quot;01/06/2014&quot;, &quot;01/06/2014&quot;, &quot;01/06/2014&quot;, &quot;01/06/~
+$ location   &lt;chr&gt; &quot;Brew&#39;ve Been Served&quot;, &quot;Brew&#39;ve Been Served&quot;, &quot;Ha~
+$ price      &lt;dbl&gt; 4.17, 9.60, 16.53, 11.51, 12.93, 4.27, 11.20, 15.~
+$ loyaltynum &lt;chr&gt; &quot;L2247&quot;, &quot;L9406&quot;, &quot;L8328&quot;, &quot;L6417&quot;, &quot;L1107&quot;, &quot;L40~</code></pre>
+</div>
+<p><em>Changing data type and extracting new columns</em></p>
+<p>It can be seen that the timestamp column is in character datatype. Hence, it is converted to timestamp format. After which day, hour and day of the week are extracted from the timestamp column. In addition, the ‘last4ccnum’ column in the credit card dataset is changed from integer format to character format.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>cc</span><span class='op'>$</span><span class='va'>timestamp</span> <span class='op'>&lt;-</span> <span class='fu'>date_time_parse</span><span class='op'>(</span><span class='va'>cc</span><span class='op'>$</span><span class='va'>timestamp</span>,
+                                zone <span class='op'>=</span> <span class='st'>""</span>,
+                                format <span class='op'>=</span> <span class='st'>"%m/%d/%Y %H:%M"</span><span class='op'>)</span>
+
+<span class='va'>lc</span><span class='op'>$</span><span class='va'>timestamp</span> <span class='op'>&lt;-</span> <span class='fu'>date_time_parse</span><span class='op'>(</span><span class='va'>lc</span><span class='op'>$</span><span class='va'>timestamp</span>,
+                                zone <span class='op'>=</span> <span class='st'>""</span>,
+                                format <span class='op'>=</span> <span class='st'>"%m/%d/%Y"</span><span class='op'>)</span>
+
+
+<span class='va'>cc</span> <span class='op'>&lt;-</span> <span class='va'>cc</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span><span class='op'>(</span>day <span class='op'>=</span> <span class='fu'>get_day</span><span class='op'>(</span><span class='va'>timestamp</span><span class='op'>)</span>,
+         hour <span class='op'>=</span> <span class='fu'>get_hour</span><span class='op'>(</span><span class='va'>timestamp</span><span class='op'>)</span>,
+         date <span class='op'>=</span> <span class='fu'>as_date</span><span class='op'>(</span><span class='va'>timestamp</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>lc</span> <span class='op'>&lt;-</span> <span class='va'>lc</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span><span class='op'>(</span>day <span class='op'>=</span> <span class='fu'>get_day</span><span class='op'>(</span><span class='va'>timestamp</span><span class='op'>)</span><span class='op'>)</span>
+
+
+<span class='va'>cc</span><span class='op'>$</span><span class='va'>dayofweek</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/weekday.POSIXt.html'>weekdays</a></span><span class='op'>(</span><span class='va'>cc</span><span class='op'>$</span><span class='va'>timestamp</span><span class='op'>)</span>
+
+<span class='va'>lc</span><span class='op'>$</span><span class='va'>dayofweek</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/weekday.POSIXt.html'>weekdays</a></span><span class='op'>(</span><span class='va'>lc</span><span class='op'>$</span><span class='va'>timestamp</span><span class='op'>)</span>
+
+<span class='va'>cc</span><span class='op'>$</span><span class='va'>last4ccnum</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>cc</span><span class='op'>$</span><span class='va'>last4ccnum</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p><em>Getting a glimpse after change</em></p>
+<p>View the columns of the dataset and their respective attributes after pre-processing.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>cc</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 1,490
+Columns: 8
+$ timestamp  &lt;dttm&gt; 2014-01-06 07:28:00, 2014-01-06 07:34:00, 2014-0~
+$ location   &lt;chr&gt; &quot;Brew&#39;ve Been Served&quot;, &quot;Hallowed Grounds&quot;, &quot;Brew&#39;~
+$ price      &lt;dbl&gt; 11.34, 52.22, 8.33, 16.72, 4.24, 4.17, 28.73, 9.6~
+$ last4ccnum &lt;chr&gt; &quot;4795&quot;, &quot;7108&quot;, &quot;6816&quot;, &quot;9617&quot;, &quot;7384&quot;, &quot;5368&quot;, &quot;~
+$ day        &lt;int&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6~
+$ hour       &lt;int&gt; 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7~
+$ date       &lt;date&gt; 2014-01-06, 2014-01-06, 2014-01-06, 2014-01-06, ~
+$ dayofweek  &lt;chr&gt; &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;,~</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>lc</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 1,392
+Columns: 6
+$ timestamp  &lt;dttm&gt; 2014-01-06, 2014-01-06, 2014-01-06, 2014-01-06, ~
+$ location   &lt;chr&gt; &quot;Brew&#39;ve Been Served&quot;, &quot;Brew&#39;ve Been Served&quot;, &quot;Ha~
+$ price      &lt;dbl&gt; 4.17, 9.60, 16.53, 11.51, 12.93, 4.27, 11.20, 15.~
+$ loyaltynum &lt;chr&gt; &quot;L2247&quot;, &quot;L9406&quot;, &quot;L8328&quot;, &quot;L6417&quot;, &quot;L1107&quot;, &quot;L40~
+$ day        &lt;int&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6~
+$ dayofweek  &lt;chr&gt; &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;,~</code></pre>
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
