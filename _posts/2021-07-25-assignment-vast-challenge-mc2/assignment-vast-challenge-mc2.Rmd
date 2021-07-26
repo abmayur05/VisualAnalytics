@@ -17,7 +17,6 @@ output:
 preview: 1.jpg
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, error=FALSE)
 ```
@@ -603,7 +602,7 @@ Previously movement data had been plotted onto the background tourist map. Now t
 gps_dot <- gps_dot_sf %>%
   filter(day==6)
 
-tmap_mode("plot")
+tmap_mode("view")
 tm_shape(bgmap) +
   tm_rgb(bgmap, r = 1, g = 2, b = 3,
          alpha = NA,
@@ -913,7 +912,9 @@ Chostus hotel had one extreme outlier of 600 by credit card number ending with 5
 
 </center>
 
-
+<center>
+<font size="2">*This was written as part of requirements for the [Visual Analytics](https://wiki.smu.edu.sg/2021t2isss608/Course_information) course offered by [MITB](https://scis.smu.edu.sg/master-it-business).*</font size="2">
+</center>
 
 
 
