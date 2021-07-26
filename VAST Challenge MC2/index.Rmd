@@ -411,7 +411,7 @@ bt
 
 Plotting the price distribution using ridge plot to get a sense of transaction ranges at different locations. The price column is transformed to log scale to get a better visualization.
 
-```{r, layout="l-page", fig.width=6, fig.height=8, fig.align='center'}
+```{r, layout="l-page", fig.width=6, fig.height=5, fig.align='center'}
 ggplot(data = cc, aes(x=log(cc$price+1), y=location,
                            fill = 0.5 - abs(0.5 - stat(ecdf))
                            ))+
@@ -533,3 +533,50 @@ gps_sf <- gps_sf %>%
 ```{r}
 glimpse(gps_sf)
 ```
+
+**Creating Movement Path From GPS Points**
+
+The code chunk below joins the GPS points into movement paths by using car id, date and hour as unique identifiers.
+
+```{r }
+gps_path <- gps_sf %>%
+  group_by(id, date, hour) %>%
+  summarize(timestamp= mean(Timestamp),
+            do_union=FALSE) %>%
+  st_cast("LINESTRING")
+```
+
+**Finding the orphan lines**
+
+After getting the movement paths we do see some orphan GPS points hence finding those orphan lines.
+
+```{r} 
+p = npts(gps_path, by_feature = TRUE)
+gps_path2 <- cbind(gps_path, p)
+```
+
+**Removing the orphan lines**
+
+```{r} 
+gps_path3 <- gps_path2[!(gps_path2$p==1),]
+```
+
+**Plotting the GPS Paths**
+
+Below code chunk is used to overplot the GPS path of all the car ids onto the background tourist map.
+
+```{r }
+gps_path_selected <- gps_path3
+tmap_mode("view")
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1, g = 2, b = 3,
+         alpha = NA,
+         saturation = 1,
+         interpolate = TRUE,
+         max.value = 255) +
+  tm_shape(gps_path_selected) +
+  tm_lines(col='red')
+```
+
+Previously using the heat map plot on location vs hour of transaction shows that there are some transactions recorded at early morning around 3 am - 4 am at Kronos Mart. Hence further plotting the GPS path during the time period to see if any car id had passed by that way.
+
