@@ -93,4 +93,79 @@ for(p in packages){
 }
 ```
 
+*Reading the credit card and loyalty card details*
+
+Importing credit card and loyalty card details into two separate data frames.
+
+```{r}
+cc <- read_csv(file = 'data/cc_data.csv')
+
+lc <- read_csv(file = 'data/loyalty_data.csv')
+```
+
+*Renaming foreign characters*
+
+A single value under the location column has a non-english character hence replacing the foreign character with alternative english character.
+
+```{r}
+setDT(cc)[location %like% "^Katerina", location := "Katerina's Cafe"]
+setDT(lc)[location %like% "^Katerina", location := "Katerina's Cafe"]
+```
+
+View the columns of the dataset and their respective attributes.
+
+```{r}
+glimpse(cc)
+glimpse(lc)
+```
+*Changing data type and extracting new columns*
+
+It can be seen that the timestamp column is in character datatype. Hence, it is converted to timestamp format. After which day, hour and day of the week are extracted from the timestamp column. In addition, the 'last4ccnum' column in the credit card dataset is changed from integer format to character format.
+
+```{r}
+cc$timestamp <- date_time_parse(cc$timestamp,
+                                zone = "",
+                                format = "%m/%d/%Y %H:%M")
+
+lc$timestamp <- date_time_parse(lc$timestamp,
+                                zone = "",
+                                format = "%m/%d/%Y")
+
+
+cc <- cc %>%
+  mutate(day = get_day(timestamp),
+         hour = get_hour(timestamp),
+         date = as_date(timestamp))
+
+lc <- lc %>%
+  mutate(day = get_day(timestamp))
+
+
+cc$dayofweek <- weekdays(cc$timestamp)
+
+lc$dayofweek <- weekdays(lc$timestamp)
+
+cc$last4ccnum <- as.character(cc$last4ccnum)
+```
+
+*Getting a glimpse after change*
+
+View the columns of the dataset and their respective attributes after pre-processing.
+
+```{r}
+glimpse(cc)
+glimpse(lc)
+```
+Usually, the loyalty cards are used along with the credit cards to get some discounts and rewards but there is a mismatch between the total number of records between the credit card transactions (1490) and loyalty card transactions (1392). 
+
+Getting the count of transactions made by the employees with credit cards and loyalty cards in order to find the most frequented and least frequented locations.
+
+```{r}
+cc_bar <- cc %>%
+  count(location, sort=TRUE)
+
+lc_bar <- lc %>%
+  count(location, sort=TRUE)
+```
+
 
