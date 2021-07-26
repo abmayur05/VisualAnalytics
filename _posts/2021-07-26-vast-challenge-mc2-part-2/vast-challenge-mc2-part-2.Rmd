@@ -48,4 +48,21 @@ gps <- read_csv("data/gps.csv")
 net <- read_csv(file = 'data/car-assignments.csv')
 ```
 
+## Task 2
+**Add the vehicle data to your analysis of the credit and loyalty card data. How does your assessment of the anomalies in question 1 change based on this new data? What discrepancies between vehicle, credit, and loyalty card data do you find? Please limit your answer to 8 images and 500 words.**
+
+**Plotting Raster Layer**
+
+```{r }
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1, g = 2, b = 3,
+         alpha = NA,
+         saturation = 1,
+         interpolate = TRUE,
+         max.value = 255)
+```
+
+The map of Abila gives us a clear picture of the distance that GASTech is away from the other locations visited by the employees. From the map of Abila, the most frequented locations such as Katerina's Cafe, Guy's Gyros, Brew've Been Served were all seems to be in close proximity with GASTech. Hippokampos was the second most frequented location but surprisingly it was not present in the map. Since the top 4 frequented locations are closely located, I assume Hippokampos also should be near to GASTech.
+
+
 
