@@ -10,11 +10,17 @@
     },
     {
       "path": "index.html",
-      "title": "Assignment",
-      "description": "Welcome to the website. I hope you enjoy it!\n",
-      "author": [],
+      "title": "Assignment - VAST Challenge MC2",
+      "description": "This post presents the step by step instructions that were followed to identify which GASTech employess made which purchases and identify suspicious patterns of behavior using visual analytic techniques.\n",
+      "author": [
+        {
+          "name": "Mayurapriyann Arulmozhi Baskaran",
+          "url": "https://www.linkedin.com/in/mayurapriyann/"
+        }
+      ],
+      "date": "07-25-2021",
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2021-07-26T11:19:26+08:00"
+      "last_modified": "2021-07-26T11:22:46+08:00"
     }
   ],
   "collections": []
