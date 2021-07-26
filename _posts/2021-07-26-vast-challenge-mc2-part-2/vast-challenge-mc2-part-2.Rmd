@@ -139,4 +139,21 @@ tm_shape(bgmap) +
 
 Previously using the heat map plot on location vs hour of transaction shows that there are some transactions recorded at early morning around 3 am - 4 am at Kronos Mart. Hence further plotting the GPS path during the time period to see if any car id had passed by that way.
 
+```{r }
+gps_path_selected <- gps_path3 %>%
+  filter(hour==3)
+tmap_mode("view")
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1, g = 2, b = 3,
+         alpha = NA,
+         saturation = 1,
+         interpolate = TRUE,
+         max.value = 255) +
+  tm_shape(gps_path_selected) +
+  tm_lines(col="red") 
+```
+
+It can be seen from the GPS data that no car had passed by Kronos mart or its near by locations between 3 am - 4 am. Hence the employee should have taken his personal vehicle or should have visited that particular location by a walk in order to hide his/her identity. The owners of credit card numbers ending with 8332, 9551 and 3484 are those who had made transaction on 19/01/2014 (Sunday) between 3 am - 4 am. Transaction gap between credit card numbers 8332 and 9551 were only three minutes. And all the three transactions were made without the use of loyalty cards.
+
+
 
