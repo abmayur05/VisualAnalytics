@@ -22,4 +22,30 @@ preview: 1.jpg
 knitr::opts_chunk$set(echo = TRUE, message = FALSE, error=FALSE)
 ```
 
+# Overview
+
+Tethys-based GAStech has been operating a natural gas production site in the island country of Kronos for the past twenty years. The company has produced remarkable profits and developed strong relationships with the government of Kronos. However, GAStech has not been successful in demonstrating environmental stewardship.
+
+In January 2014, the leaders of GAStech are celebrating their newfound fortune as a result of the initial public offering of their very successful company. In the midst of this celebration, several employees of GAStech go missing. An organization known as the Protectors of Kronos (POK) is suspected of the disappearance.
+
+# Objective
+
+Most of the employees of GAStech are provided with company cars approved for both personal and business use. Those who do not have company cars are given access to company trucks, but these cannot be used for personal use. 
+
+The company cars are of much higher quality than the cars the employees would be able to afford otherwise. However, GAStech has installed geospatial tracking software in the company vehicles to track the movements periodically. The vehicle data is available for two weeks prior to the disappearance. 
+
+In addition to the geospatial data, Kronos-based companies provide a benefits card giving the employees discounts and rewards in exchange for collecting the credit card purchases and preferences. The objective of the analysis is to identify suspicious patterns of behavior of the employees to make recommendations for further investigation.
+
+In January 2014, the leaders of GAStech are celebrating their newfound fortune as a result of the initial public offering of their very successful company. In the midst of this celebration, several employees of GAStech go missing. An organization known as the Protectors of Kronos (POK) is suspected of the disappearance.
+
+# Literature review
+
+Literature review was conducted to analyze how the various analyses with similar objectives had been performed earlier and whether those techniques used in the past are applicable to this assignment with/without enhancements.  Also, the issues identified in the previous analyses were also discussed and alternative approaches are provided to overcome those issues. The mini-challenge published in the year 2014 was similar hence a few of those submissions were reviewed before starting this assignment.
+
+1. In the submission by Middlesex University, the credit card and loyalty card usage by the employees of GASTech was visualized by 3D bar plot and it can be inferred that truck drivers tend to spend the most compared to the other employees but it is always advisable to avoid using 3D effects unless we have three-dimensional data. Clear visualizations can be achieved by using interactive 2D plots. Most of the analyses have been performed by custom-made analytical tools which are not accessible by the general public. Hence this assignment is built on R packages to cater wide segment of the audience mainly due to script reproducibility.
+2. In the submission by KU Leven University, the daily routine is interestingly visualized by grouping it according to the department type and further faceted by day of the month. A box plot is utilized to find the outliers present for all the locations where the credit cards are used. Though it is spaced perfectly to get a clear view, we were not able to pinpoint the location of the outlier quickly as there are many locations. To overcome this issue, in our assignment I have added interactivity by adding the tooltip so by just hovering the mouse cursor on the outliers shows the corresponding location where the transaction had taken place and in addition to this, other details such as minimum, 25th percentile, median, 75th percentile, maximum values can also be found.
+3. In the submission by the University of Buenos Aires,  a heat map is used to visualize the credit card data per hour with sequential colors to find out the abnormalities, though it is visually appealing to find the abnormalities, the exact number of transactions cannot be got from the plot. This issue can be overcome by adding interactivity to the heat map so that the count of the transactions can be known via tooltips just hovering the cursor over the specific points.
+
+# Building the visualization
+
 
