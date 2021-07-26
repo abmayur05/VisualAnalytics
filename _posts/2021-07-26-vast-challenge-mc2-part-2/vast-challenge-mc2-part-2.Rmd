@@ -126,7 +126,7 @@ Below code chunk is used to overplot the GPS path of all the car ids onto the ba
 
 ```{r }
 gps_path_selected <- gps_path3
-tmap_mode("view")
+tmap_mode("plot")
 tm_shape(bgmap) +
   tm_rgb(bgmap, r = 1, g = 2, b = 3,
          alpha = NA,
@@ -142,7 +142,7 @@ Previously using the heat map plot on location vs hour of transaction shows that
 ```{r }
 gps_path_selected <- gps_path3 %>%
   filter(hour==3)
-tmap_mode("view")
+tmap_mode("plot")
 tm_shape(bgmap) +
   tm_rgb(bgmap, r = 1, g = 2, b = 3,
          alpha = NA,
@@ -162,7 +162,7 @@ Below GPS path had been plotted for car id 28.
 ```{r }
 gps_path_selected <- gps_path3 %>%
   filter(id == 28)
-tmap_mode("view")
+tmap_mode("plot")
 tm_shape(bgmap) +
   tm_rgb(bgmap, r = 1, g = 2, b = 3,
          alpha = NA,
@@ -178,7 +178,7 @@ By glazing through the routes visited by the employee car 28, there is an eviden
 ```{r }
 gps_path_selected <- gps_path3 %>%
   filter(date=='2014-01-13' & hour>=19 & hour<20)
-tmap_mode("view")
+tmap_mode("plot")
 tm_shape(bgmap) +
   tm_rgb(bgmap, r = 1, g = 2, b = 3,
          alpha = NA,
