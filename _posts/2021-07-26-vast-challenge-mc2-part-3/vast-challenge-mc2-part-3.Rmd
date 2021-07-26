@@ -1,0 +1,25 @@
+---
+title: "VAST Challenge MC2 - Part 3"
+description: |
+  This post presents the step by step instructions that were followed to identify which GASTech employess made which purchases and identify suspicious patterns of behavior using visual analytic techniques.
+author:
+  - name: Mayurapriyann Arulmozhi Baskaran
+    url: https://www.linkedin.com/in/mayurapriyann/
+date: 07-25-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_float: true
+    smooth_scroll: true
+    theme: united
+    highlight: tango
+preview: 1.jpg
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, error=FALSE)
+```
+
+
