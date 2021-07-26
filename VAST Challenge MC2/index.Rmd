@@ -832,5 +832,53 @@ DT::datatable(dt_linked,
 ```
 The interactive data table above provides the car id and name of the employee linked to the credit card and loyalty card details.
 
+## Task 4
+**Given the data sources provided, identify potential informal or unofficial relationships among GASTech personnel. Provide evidence for these relationships. Please limit your response to 8 images and 500 words.**
+
+Clubbing the car id with that of the employee name and reordering the columns.
+
+```{r}
+sp <- net %>%
+  unite('Merged', CarID:Name, sep= " ", remove = TRUE)
+
+sp <- sp %>%
+  rename(Employee = Merged)
+
+sp <- sp[c("Employee","CurrentEmploymentTitle","CurrentEmploymentType")]
+```
+
+```{r}
+bt <- merged_cards %>%
+  filter(loyaltynum %in% c("L2070","L2247","L3288","L3295","L6119",
+                           "L6267","L8566","L9406")) %>%
+  group_by(last4ccnum, loyaltynum) %>%
+  summarise(n=n())
+
+bt
+```
+
+Plot a network graph to show the relationship between credit cards and loyalty cards.
+
+```{r}
+df <- bt[, c(1, 2)]
+g <- graph_from_data_frame(df)
+V(g)$type <- bipartite_mapping(g)$type
+plot(g)
+```
+
+Credit card numbers ending with 9241 & 1286 share the same loyalty card and 6691 & 6899 share the same loyalty card. Therefore we can infer that there is some close between owners of credit card numbers ending with 9241 and 1286. Similarly, there should be some close relationship between owners of credit card numbers ending with 6691 and 6899.
+
+Others possible close relationships can be established between the owners of the credit card ending with pairs 5368<->7889, 5921<->4948, 4795<->8332. Because in all these three pairs have two loyalty cards as common between them. Say for example if see the directed network relationship between 5368 and 7889, we can infer that sometimes the 5368 card owner uses either L6119 or L2247. Similarly, the 7889 card owner also uses either L6119 or L2247.
+
+Below data table shows the corresponding employment title and employment type of the employees.
+
+```{r}
+DT::datatable(sp,
+              filter = 'top') %>%
+  formatStyle(columns = 1,
+              target = 'row',
+              lineHeight = '100%')
+```
+
 
 
