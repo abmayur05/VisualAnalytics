@@ -168,4 +168,90 @@ lc_bar <- lc %>%
   count(location, sort=TRUE)
 ```
 
+*Plotting the most frequented and least frequented locations*
+
+```{r, layout="l-page", fig.width=8, fig.height=6, fig.align='center'}
+fig <- plot_ly(cc_bar, x = ~location, y = ~n, type = 'bar', hoverinfo="text", text = ~paste(location,'</br></br>', n),
+               marker = list(color = ~n,
+                             colorbar = list(title = 'Visits'))) %>%
+  layout(title = "Popular locations by credit card transactions",
+         xaxis = list(title = "Location", categoryarray = ~location, categoryorder = "array", tickangle                = 270),
+         yaxis = list(title = "Visits"))
+fig
+```
+
+```{r, layout="l-page", fig.width=8, fig.height=6, fig.align='center'}
+fig <- plot_ly(lc_bar, x = ~location, y = ~n, type = 'bar', hoverinfo="text", text = ~paste(location,'</br></br>', n),
+               marker = list(color = ~n,
+                             colorbar = list(title = 'Visits'))) %>%
+  layout(title = "Popular locations by loyalty card transactions",
+         xaxis = list(title = "Location", categoryarray = ~location, categoryorder = "array", tickangle                = 270),
+         yaxis = list(title = "Visits")) 
+fig
+```
+
+By comparing both the bar plots by credit card and loyalty card transactions, the most popular locations are identified as Katerina's Cafe, Hippokampos, Guy's Gyros and Brew've Been Served. The fifth popular location is Hallowed Grounds according to the number of transactions made by credit card. But there is some anomaly in the usage of loyalty cards in this location as there are mismatches in total credit card transactions and total loyalty card transactions. The total number of credit card transactions in this location is 92 but the total number of loyalty card transactions is only 80. One suspicious transaction that can be observed from the above plot is at location Daily Dealz as there was only one recorded credit card transaction over the period of 14 days and also the loyalty card is not used in this particular location.
+
+Now plotting a heatmap to find out the most visited and least visited locations by hour of the day.
+
+```{r, layout="l-page", fig.width=6, fig.height=8, fig.align='center'}
+cc$location <- stri_trans_general(cc$location, "latin-ascii")
+x_axis_labels <- min(cc[,'hour']):max(cc[,'hour'])
+
+p <- group_by(cc,hour,location) %>% summarize(n=n()) %>% 
+  ggplot(aes(hour,location,fill=n)) + geom_tile() +
+  scale_x_continuous(expand=c(0,0),labels = x_axis_labels, breaks = x_axis_labels) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))+
+  scale_fill_distiller(palette = "Reds", direction = 1, labels = c(0, 20, 40, 60, "> 80")) +
+  labs(title = "Most/least frequented locations by hour of the day", y = "Location", x = "Hour")
+
+ggplotly(p)
+```
+
+Hourly popularity can be inferred from the above heatmap. 
+
+Morning 7 am - 9 am
+
+1. Brew've Been Served
+2. Hallowed Grounds
+3. Coffee Cameleon <br>
+The name of these locations suggests that they might serve coffee and snacks. The surge in the morning hours may indicate that the employees tend to have their breakfast/coffee at these locations before going to GASTech.
+
+Noon 12 pm - 2 pm
+
+1. Hippokampos
+2. Katerina's Cafe
+3. Abila Zachora
+4. Gelatogalore
+5. Guy's Gyros <br>
+This might be the lunchtime for the GASTech employees. The list shows only the top 5 locations between 12 pm - 2 pm. But unlike breakfast locations which were limited to only three highly sought-after outlets, the employees tend to have various options for lunch.
+
+Evening 7 pm - 9 pm
+
+1. Katerina's Cafe
+2. Guy's Gyros
+3. Hippokampos
+4. Frydos Autosupply n' More
+5. Ouzeri Elian <br>
+This should be the dinner time for the employees. The time period corresponding to morning and noon seem to have locations related to food and beverages. But between 7 pm - 9 pm, there seems to be some surge in visitors at Frydos Autosupply n' More.
+
+Below is a heatmap to find out the most visited and least visited locations by day of the month.
+
+```{r, layout="l-page", fig.width=6, fig.height=8, fig.align='center'}
+cc$location <- stri_trans_general(cc$location, "latin-ascii")
+x_axis_labels <- min(cc[,'day']):max(cc[,'day'])
+
+p <- group_by(cc,day,location) %>% summarize(n=n()) %>% 
+  ggplot(aes(day,location,fill=n)) + geom_tile() +
+  scale_x_continuous(expand=c(0,0),labels = x_axis_labels, breaks = x_axis_labels) +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5))+
+  scale_fill_distiller(palette = "Reds", direction = 1) +
+  labs(y= "Location", x = "Day Of Month", title = "Most/least frequented locations by day of month")
+
+ggplotly(p)
+```
+
+Over the 14 days period, places such as Katerina's Cafe, Hippokampos and Guy's Gyros are popular. One of the other popular places is Brew've Been Served but there are no transactions on both the weekends so we can infer that this outlet is closed on weekends. 
+
+
 
