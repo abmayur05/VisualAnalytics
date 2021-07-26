@@ -64,5 +64,44 @@ tm_shape(bgmap) +
 
 The map of Abila gives us a clear picture of the distance that GASTech is away from the other locations visited by the employees. From the map of Abila, the most frequented locations such as Katerina's Cafe, Guy's Gyros, Brew've Been Served were all seems to be in close proximity with GASTech. Hippokampos was the second most frequented location but surprisingly it was not present in the map. Since the top 4 frequented locations are closely located, I assume Hippokampos also should be near to GASTech.
 
+**Converting Date-Time field and ID field**
 
+```{r }
+gps$Timestamp <- date_time_parse(gps$Timestamp,
+                                 zone = "",
+                                 format = "%m/%d/%Y %H:%M:%S")
+gps$id <- as_factor(gps$id)
+```
+
+**Converting Aspatial Data Into A Simple Feature data Frame**
+
+```{r }
+gps_sf <- st_as_sf(gps,
+                   coords = c("long","lat"),
+                   crs = 4326)
+```
+
+```{r }
+gps_sf <- gps_sf %>%
+  mutate(day = get_day(Timestamp),
+         hour = get_hour(Timestamp),
+         dayofweek = date_weekday_factor(Timestamp) ,
+         date = as_date(Timestamp))
+```
+
+```{r}
+glimpse(gps_sf)
+```
+
+**Creating Movement Path From GPS Points**
+
+The code chunk below joins the GPS points into movement paths by using car id, date and hour as unique identifiers.
+
+```{r }
+gps_path <- gps_sf %>%
+  group_by(id, date, hour) %>%
+  summarize(timestamp= mean(Timestamp),
+            do_union=FALSE) %>%
+  st_cast("LINESTRING")
+```
 

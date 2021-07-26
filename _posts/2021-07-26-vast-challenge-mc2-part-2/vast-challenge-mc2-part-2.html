@@ -1541,7 +1541,63 @@ Geodetic CRS:  WGS 84</code></pre>
 <p><img src="vast-challenge-mc2-part-2_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
 </div>
 <p>The map of Abila gives us a clear picture of the distance that GASTech is away from the other locations visited by the employees. From the map of Abila, the most frequented locations such as Katerina’s Cafe, Guy’s Gyros, Brew’ve Been Served were all seems to be in close proximity with GASTech. Hippokampos was the second most frequented location but surprisingly it was not present in the map. Since the top 4 frequented locations are closely located, I assume Hippokampos also should be near to GASTech.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p><strong>Converting Date-Time field and ID field</strong></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>gps</span><span class='op'>$</span><span class='va'>Timestamp</span> <span class='op'>&lt;-</span> <span class='fu'>date_time_parse</span><span class='op'>(</span><span class='va'>gps</span><span class='op'>$</span><span class='va'>Timestamp</span>,
+                                 zone <span class='op'>=</span> <span class='st'>""</span>,
+                                 format <span class='op'>=</span> <span class='st'>"%m/%d/%Y %H:%M:%S"</span><span class='op'>)</span>
+<span class='va'>gps</span><span class='op'>$</span><span class='va'>id</span> <span class='op'>&lt;-</span> <span class='fu'>as_factor</span><span class='op'>(</span><span class='va'>gps</span><span class='op'>$</span><span class='va'>id</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p><strong>Converting Aspatial Data Into A Simple Feature data Frame</strong></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>gps_sf</span> <span class='op'>&lt;-</span> <span class='fu'>st_as_sf</span><span class='op'>(</span><span class='va'>gps</span>,
+                   coords <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"long"</span>,<span class='st'>"lat"</span><span class='op'>)</span>,
+                   crs <span class='op'>=</span> <span class='fl'>4326</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>gps_sf</span> <span class='op'>&lt;-</span> <span class='va'>gps_sf</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span><span class='op'>(</span>day <span class='op'>=</span> <span class='fu'>get_day</span><span class='op'>(</span><span class='va'>Timestamp</span><span class='op'>)</span>,
+         hour <span class='op'>=</span> <span class='fu'>get_hour</span><span class='op'>(</span><span class='va'>Timestamp</span><span class='op'>)</span>,
+         dayofweek <span class='op'>=</span> <span class='fu'>date_weekday_factor</span><span class='op'>(</span><span class='va'>Timestamp</span><span class='op'>)</span> ,
+         date <span class='op'>=</span> <span class='fu'>as_date</span><span class='op'>(</span><span class='va'>Timestamp</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>gps_sf</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 685,169
+Columns: 7
+$ Timestamp &lt;dttm&gt; 2014-01-06 06:28:01, 2014-01-06 06:28:01, 2014-01~
+$ id        &lt;fct&gt; 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35~
+$ geometry  &lt;POINT [°]&gt; POINT (24.87469 36.07623), POINT (24.8746 36~
+$ day       &lt;int&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,~
+$ hour      &lt;int&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,~
+$ dayofweek &lt;ord&gt; Mon, Mon, Mon, Mon, Mon, Mon, Mon, Mon, Mon, Mon, ~
+$ date      &lt;date&gt; 2014-01-06, 2014-01-06, 2014-01-06, 2014-01-06, 2~</code></pre>
+</div>
+<p><strong>Creating Movement Path From GPS Points</strong></p>
+<p>The code chunk below joins the GPS points into movement paths by using car id, date and hour as unique identifiers.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>gps_path</span> <span class='op'>&lt;-</span> <span class='va'>gps_sf</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>id</span>, <span class='va'>date</span>, <span class='va'>hour</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>summarize</span><span class='op'>(</span>timestamp<span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>Timestamp</span><span class='op'>)</span>,
+            do_union<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>st_cast</span><span class='op'>(</span><span class='st'>"LINESTRING"</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
