@@ -649,4 +649,188 @@ tm_shape(bgmap) +
 
 Car IDs - 13,15,16,34 GPS points impression can be seen around Frydos Autosupply on 13/01/2014 between 7pm-8pm as there was an unusal transaction. It will be further analysed at a later stage.
 
+# Task 3
+**Can you infer the owners of each credit card and loyalty card? What is your evidence? Where are there uncertainties in your method? Where are there uncertainties in the data? Please limit your answer to 8 images and 500 words.**
+
+**Finding the lag**
+
+Since the GPS moving data is captured, it is hard to find the location were the car had stopped to make a transaction. So, I have taken the difference between consecutive timestamp grouped by ids and filter the points with more than 2 minutes difference.
+
+```{r}
+gps_lag <- gps_sf %>%
+  group_by(id) %>%
+  mutate(next_timestamp = lead(Timestamp, order_by = Timestamp))
+```
+
+```{r}
+names(gps_lag)[names(gps_lag)=='Timestamp'] <- 'timestamp'
+gps_lag <- gps_lag[c("id","timestamp", "next_timestamp","date","day","hour","dayofweek","geometry")]
+```
+
+```{r}
+gps_lag$lag_sec <- as.numeric(gps_lag$next_timestamp - gps_lag$timestamp)
+gps_lag <- gps_lag[c("id","timestamp", "next_timestamp","lag_sec", "date","day","hour","dayofweek","geometry")]
+gps_lag <-gps_lag[order(gps_lag$id, gps_lag$timestamp),]
+gps_lag$lag_min <- as.numeric(gps_lag$lag_sec)/60
+gps_lag <- gps_lag[c("id","timestamp", "next_timestamp","lag_sec","lag_min", "date","day","hour","dayofweek","geometry")]
+```
+
+Filtering only the stationary points where the car has stopped for more than 2 minutes and less than 360 minutes (i.e) 6 hours. An employee is assumed to be at his home if the time lag between consecutive points are more than 6 hours.
+
+```{r}
+gps_loc <- gps_lag %>%
+  filter(lag_min>2, lag_min<360)
+```
+
+Preparing the data to plot as dots on the background tourist map.
+
+```{r }
+gps_loc <- separate(gps_loc, geometry, into = c("long", "lat"), sep = ",")
+gps_loc$long <- gsub("c\\(", "", gps_loc$long)
+gps_loc$lat <- gsub("\\)", "", gps_loc$lat)
+```
+
+```{r}
+gps_dot_sf <- st_as_sf(gps_loc,
+                       coords = c("long","lat"),
+                       crs = 4326)
+```
+
+
+```{r}
+glimpse(gps_dot_sf)
+```
+
+Previously movement data had been plotted onto the background tourist map. Now the stationary points data is plotted onto the background tourist map. The day is filtered to 6 for now but during analysis, the filter criteria would be changed to meet the needs.
+
+```{r}
+gps_dot <- gps_dot_sf %>%
+  filter(day==6)
+
+tmap_mode("view")
+tm_shape(bgmap) +
+  tm_rgb(bgmap, r = 1, g = 2, b = 3,
+         alpha = NA,
+         saturation = 1,
+         interpolate = TRUE,
+         max.value = 255) +
+tm_shape(gps_dot)+
+tm_bubbles(col = "red",
+           size = 1, 
+           size.max = 1,
+           border.col = "black",
+           border.lwd = 1) +
+  tm_facets(by = 'id',
+            ncol = 1,
+            scale.factor = 5)
+```
+
+Below csv file holding the car id, name, department, employee designation are loaded into a dataframe.
+
+```{r}
+net <- read_csv(file = 'data/car-assignments.csv')
+```
+
+**Combining the first name and last name of the employees**
+
+The first name and the last name column are combined together to get the full name of the employee after which the first name and last name columns are dropped as they are no longer needed.
+
+```{r}
+net <- net %>%
+  unite('Merged', LastName:FirstName, sep= " ", remove = FALSE)
+net <- net %>%
+  rename(Name = Merged)
+glimpse(net)
+net <- select(net, -c(FirstName, LastName))
+```
+In order to link the employee name to credit card details, the GPS points are plotted in the map as dots for each card id using the facet function and then filtered by any one day of the month. So now we have the dots in the map with stop time and start time as shown below.
+
+<center>
+![Tooltip at a Hallowed Grounds](img/16.JPG)
+
+</center>
+
+It can be inferred from the snapshot above that car id 1 had stopped at Hallowed grounds on 2014-01-06 for about 35 minutes from 7:22 am to 7:57 am. Now the same record is to verified from credit card DT table as shown below.
+
+<center>
+![Data table records for Hallowed Grounds](img/17.jpg)
+
+</center>
+
+It can seen that there are few transactions that took place between 7:22 am and 7:57 am on 2014-01-06. So in this case we have see for other points in the map where the car had stopped and repeat the same process. If we can pinpoint on one of the credit card details without any overlap from other transactions, then we can link the corresponding credit card and car id. Sometimes it gets complicated so in these cases we have look for different days to zero down on the car id and credit card number.
+
+**Mapping the car assignment based on last 4 digits of the credit card**
+
+```{r}
+cc_full <-cc %>%
+  mutate(CarID = case_when(
+    last4ccnum == "9551" ~ 1,
+    last4ccnum == "4434" ~ 2,
+    last4ccnum == "8332" ~ 3,
+    last4ccnum == "7688" ~ 4,
+    last4ccnum == "6899" ~ 5,
+    last4ccnum == "7253" ~ 6,
+    last4ccnum == "1321" ~ 7,
+    last4ccnum == "7889" ~ 8,
+    last4ccnum == "3853" ~ 9,
+    last4ccnum == "9635" ~ 10,
+    last4ccnum == "7117" ~ 11,
+    last4ccnum == "7108" ~ 12,
+    last4ccnum == "5368" ~ 13,
+    last4ccnum == "1874" ~ 14,
+    last4ccnum == "9241" ~ 15,
+    last4ccnum == "2142" ~ 16,
+    last4ccnum == "8411" ~ 17,
+    last4ccnum == "9617" ~ 18,
+    last4ccnum == "6895" ~ 19,
+    last4ccnum == "6816" ~ 20,
+    last4ccnum == "4948" ~ 21,
+    last4ccnum == "2681" ~ 22,
+    last4ccnum == "3484" ~ 23,
+    last4ccnum == "9405" ~ 24,
+    last4ccnum == "5921" ~ 25,
+    last4ccnum == "1310" ~ 26,
+    last4ccnum == "3492" ~ 27,
+    last4ccnum == "7384" ~ 28,
+    last4ccnum == "3547" ~ 29,
+    last4ccnum == "7819" ~ 30,
+    last4ccnum == "7792" ~ 31,
+    last4ccnum == "2540" ~ 32,
+    last4ccnum == "9683" ~ 33,
+    last4ccnum == "8202" ~ 34,
+    last4ccnum == "8156" ~ 35
+    )
+)
+```
+
+
+```{r}
+glimpse(cc_full)
+```
+
+```{r}
+temp <- net[c("CarID", "Name")]
+cc_full <- left_join(cc_full, temp, by = "CarID")
+
+cc_full_nonull <- cc_full %>% filter(!is.na(CarID))
+```
+
+```{r}
+temp2 <- cc_full_nonull[,c("timestamp","CarID","Name","location","price","last4ccnum","date")]
+
+temp3 <- lc[,c("timestamp","location","price","loyaltynum")]
+
+dt_linked <- left_join(temp2, temp3, by = c("date" = "timestamp", "location" = "location", "price" = "price"))
+  
+DT::datatable(dt_linked,
+              filter = 'top') %>%
+  formatStyle(columns = 1,
+              target = 'row',
+              lineHeight = '100%') %>%
+  formatDate(1, "toLocaleString") %>%
+  formatDate(7, "toLocaleDateString")
+```
+The interactive data table above provides the car id and name of the employee linked to the credit card and loyalty card details.
+
+
 
