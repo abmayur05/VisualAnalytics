@@ -597,7 +597,8 @@ glimpse(gps_dot_sf)
 ```
 
 Previously movement data had been plotted onto the background tourist map. Now the stationary points data is plotted onto the background tourist map. The day is filtered to 6 for now but during analysis, the filter criteria would be changed to meet the needs.
-(Note: The actual plot used for analysis is dynamic, however converted it to static in order to render quickly in netlify)
+
+(Note: The actual plot used for analysis was interactive, however converted it to static in order to avoid rendering issues in netlify)
 
 ```{r}
 gps_dot <- gps_dot_sf %>%
