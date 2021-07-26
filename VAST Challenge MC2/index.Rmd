@@ -881,4 +881,143 @@ DT::datatable(sp,
 ```
 
 
+## Task 5
+**Do you see evidence of suspicious activity? Identify 1- 10 locations where you believe the suspicious activity is occurring, and why Please limit your response to 10 images and 500 words**
+
+1. Frydos Autosupply n' More
+
+```{r, layout="l-page", fig.width=6, fig.height=8, fig.align='center'}
+plot_ly(cc, x = ~price, y = ~location) %>%
+  add_boxplot() %>%
+  layout(yaxis = list(title = "Location", tickmode='linear'),
+         xaxis = list(title = "Price"), 
+         title = "Location vs Transaction value")
+```
+
+The box plot shows that there is an extreme outlier for a transaction price of 10000 in Frydos Autosupply n’ More on 13/01/2014 7:20 PM.
+
+<center>
+![Closer look at the outlier in data table](img/2.JPG)
+
+</center>
+
+This suspicious transaction was made by Calixto Nils without using loyalty card. Loyalty cards are ideally used when the purchase amount is higher in order to get some discounts/benefits. Also the second highest spent amount by credit card 9551 was only 276.9. This shows that he was not a lavish spender.
+
+2. Kronos Mart
+
+<center>
+![Kronos Mart highlighted in heatmap](img/3.jpg)
+
+</center>
+
+Kronos Mart which is located far away from GASTech had suspicious transactions around 3 am - 4 am on s Sunday. In addition, the credit card number ending with 9551 had also made a transaction around 3:45 am. These early morning transactions needs to be investigated. None of transactions in Kronos Mart had used loyalty card. Balas Felix, Calixto Nils  and Lagos Varja had made some purchases between 3 am - 4 am. The time interval between Balas Felix and Calixto Nils is only three minutes.
+
+<center>
+![Kronos Mart records from data table](img/4.jpg)
+
+</center>
+
+3. Hippokampos
+
+<center>
+![Hippokampos highlighted in heatmap](img/5.jpg)
+
+</center>
+
+One midnight transaction had happened between 10 pm - 11 pm on a Friday in Hippokampos. The location of hippokampos is not shown in the background map but going by the assumption, the location of Hippokampos should be near by Katerina's Cafe and Guy's Gyros. Loyalty card has not been used for this transaction as well.
+
+<center>
+![Hippokampos records from data table](img/6.jpg)
+
+</center>
+
+4. Daily Dealz
+
+<center>
+![Least transacted location](img/7.jpg)
+
+</center>
+
+During the 14 day period, Daily Dealz location was visited only once which makes this transaction suspicious. 
+
+<center>
+![Daily Dealz record from data table](img/8.jpg)
+
+</center>
+
+Surprisingly, this transaction is also made by Calixto Nils who was already linked to two of the suspicious locations above. Loyalty card was not used here as well.
+
+5. Abila Scrapyard
+
+<center>
+![Least number of unique visitors](img/9.jpg)
+
+</center>
+
+Abila Scrapyard was visited only by a single employee 4 times in this 14 days. In addition, there seems to be a pattern as the employee holding the credit card ending with 2276 had visited Abila Scrapyard during Tuesday and Thurday in both week 1 and week 2.
+
+<center>
+![Abila scrapyard records from data table](img/10.jpg)
+
+</center>
+
+6. Coffee Shack
+
+<center>
+![Second least number of unique visitors](img/11.jpg)
+
+</center>
+
+F&B outlets are those locations that attract more customers. If we see the most popular locations, F&B locations hold the top positions but Coffee Shack outlet located near Albert's Fine Clothing was only visited by a single employee 8 times within 14 day period. And also the timestamp recorded seems to be ambiguous as all the transactions were recorded at 12:00 PM. The employee is identified as Calzas Axel.
+
+<center>
+![Coffee Shack records from data table](img/12.jpg)
+
+</center>
+
+7. Albert's Fine Clothing
+
+```{r, layout="l-page", fig.width=6, fig.height=8, fig.align='center'}
+plot_ly(cc, x = ~price, y = ~location) %>%
+  add_boxplot() %>%
+  layout(yaxis = list(title = "Location", tickmode='linear'),
+         xaxis = list(title = "Price"), 
+         title = "Location vs Transaction value")
+```
+
+There is an outlier in Albert's Fine Clothing. Usual transaction were only below 308.36 but one transaction stood out among others are 1239.41. Orilla Elsa is found to be the credit card owner.
+
+<center>
+![Albert's Clothing records from data table](img/13.jpg)
+
+</center>
+
+All the other transactions by Orilla were less than 120.65. So, further investigation is required on what made her spend 10 times the second highest amount in her transaction.
+
+<center>
+![Closer look at other transactions](img/14.jpg)
+
+</center>
+
+8. Chostus Hotel
+
+```{r, layout="l-page", fig.width=6, fig.height=8, fig.align='center'}
+plot_ly(cc, x = ~price, y = ~location) %>%
+  add_boxplot() %>%
+  layout(yaxis = list(title = "Location", tickmode='linear'),
+         xaxis = list(title = "Price"), 
+         title = "Location vs Transaction value")
+```
+
+Chostus hotel had one extreme outlier of 600 by credit card number ending with 5010. The usual transactins ranges between 100-200. So this has to be investigated. And there seems to be pattern between Tempestad Brand and Strum Orhan as these two employees visit Chostus hotel on same days over the two weeks. Transaction time is also same for these two employees.
+
+<center>
+![Chostus Hotel records from data table](img/18.jpg)
+
+</center>
+
+<center>
+<font size="2">*This was written as part of requirements for the [Visual Analytics](https://wiki.smu.edu.sg/2021t2isss608/Course_information) course offered by [MITB](https://scis.smu.edu.sg/master-it-business).*</font size="2">
+</center>
+
 
