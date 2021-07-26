@@ -326,5 +326,43 @@ axis.title.y = element_text(hjust = 0.5)
 ```
 This ridge plot is used to display the transaction price distribution across all the locations visited by the employees of GASTech. Transaction price is expressed in log scale for better visualization. Locations such as U-Pump, Maximum Iron and Steel, Kronos Pipe and Irrigation, Carlyle Chemical Inc., Abila Airport, Abila Scrapyard and Nationwide Refinery were the high priced transactions had taken place.
 
+Below is a interactive data table with credit card transaction details which can be utilised at a later stage of the analysis.
+
+```{r}
+DT::datatable(cc,
+              filter = 'top') %>%
+  formatStyle(columns = 0,
+              target = 'row',
+              lineHeight = '100%') %>%
+  formatDate(1, "toLocaleString")
+```
+A granular level information can be got by referring the interactive data table to check for any anomalies throughout this analysis.
+
+Below is a interactive data table with credit card transaction details and loyalty card transaction details to know the credit card and loyalty card pairs that had been used together.
+
+```{r}
+DT::datatable(merged_cards,
+              filter = 'top') %>%
+  formatStyle(columns = 0,
+              target = 'row',
+              lineHeight = '100%') %>%
+  formatDate(1, "toLocaleString") %>%
+  formatDate(7, "toLocaleDateString")
+```
+
+The below data table shows the unique transaction and total transaction details based on the locations.
+
+```{r}
+z <- cc %>%
+  group_by(location) %>%
+  summarise(unique = n_distinct(last4ccnum), total=n())
+
+DT::datatable(z,
+              filter = 'top') %>%
+  formatStyle(columns = 1,
+              target = 'row',
+              lineHeight = '100%')
+```
+
 
 
