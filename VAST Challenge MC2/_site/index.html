@@ -2038,6 +2038,14 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   <!--/radix_placeholder_distill-->
   <script src="site_libs/header-attrs-2.8/header-attrs.js"></script>
+  <script src="site_libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+  <script src="site_libs/plotly-binding-4.9.4.1/plotly.js"></script>
+  <script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+  <script src="site_libs/jquery-3.5.1/jquery.min.js"></script>
+  <link href="site_libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
+  <script src="site_libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+  <link href="site_libs/plotly-htmlwidgets-css-1.57.1/plotly-htmlwidgets.css" rel="stylesheet" />
+  <script src="site_libs/plotly-main-1.57.1/plotly-latest.min.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2107,8 +2115,301 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <li>In the submission by KU Leven University, the daily routine is interestingly visualized by grouping it according to the department type and further faceted by day of the month. A box plot is utilized to find the outliers present for all the locations where the credit cards are used. Though it is spaced perfectly to get a clear view, we were not able to pinpoint the location of the outlier quickly as there are many locations. To overcome this issue, in our assignment I have added interactivity by adding the tooltip so by just hovering the mouse cursor on the outliers shows the corresponding location where the transaction had taken place and in addition to this, other details such as minimum, 25th percentile, median, 75th percentile, maximum values can also be found.</li>
 <li>In the submission by the University of Buenos Aires, a heat map is used to visualize the credit card data per hour with sequential colors to find out the abnormalities, though it is visually appealing to find the abnormalities, the exact number of transactions cannot be got from the plot. This issue can be overcome by adding interactivity to the heat map so that the count of the transactions can be known via tooltips just hovering the cursor over the specific points.</li>
 </ol>
+<h2 id="task-1">Task 1</h2>
+<p><strong>Using just the credit and loyalty card data, identify the most popular locations, and when they are popular. What anomalies do you see? What corrections would you recommend to correct these anomalies?</strong></p>
+<p>All the data extraction, wrangling and preparing the input data required to perform the analysis are done in R using appropriate packages.</p>
+<p><em>Setting up the environment</em></p>
+<p>Firstly, it is important to install the necessary R packages and launch them into R Studio environment. The below code chunk checks for the available packages and installs those packages that are not available. In-addition to that, all those packages will be launched into RStudio environment.</p>
+<p>raster - To read, write, manipulate, analyze, model spatial data <br> sf - To support simple features and encode spatial vector data <br> tmap - To visualize spatial data distributions <br> tidyverse - A opinionated collection of R packages for data science <br> clock - Provides a comprehensive library for date-time manipulations <br> rgdal - Works on both raster and vector data types for manipulating geospatial data <br> tidytext - Makes text mining tasks easier, more effective and consistent <br> widyr - To widen the matrix, perform some processing, then turn back to tidy form <br> DT - To render data objects as HTML tables using JavaScript library <br> dplyr - A fast, consistent tool for working with data frame like objects <br> hms - To store and format time-of-day values <br> ggraph - An extension of ggplot2 for graph and network visualizations<br> igraph - For simple graphs and network analysis <br> crosstalk - To support linked brushing and filtering <br> plotly - To create interactive web graphics and custom interface <br> data.table - To handle data sets in R <br> stringi - For fast, correct, consistent, and convenient string/text manipulation <br> mapview - To create interactive visualizations of spatial data <br> ggridges - Used for visualizing changes in distributions over time <br> networkD3 - To create interactive network graphs with JavaScript <br> htmlwidgets - A framework for creating HTML widgets in R console <br></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>packages</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'raster'</span>,<span class='st'>'sf'</span>,<span class='st'>'tmap'</span>,<span class='st'>'tidyverse'</span>,<span class='st'>'clock'</span>,<span class='st'>'rgdal'</span>,<span class='st'>'tidytext'</span>,<span class='st'>'widyr'</span>,
+             <span class='st'>'DT'</span>,<span class='st'>'dplyr'</span>,<span class='st'>'hms'</span>,<span class='st'>'ggraph'</span>,<span class='st'>'igraph'</span>,<span class='st'>'crosstalk'</span>,
+             <span class='st'>'plotly'</span>,<span class='st'>'data.table'</span>,<span class='st'>'stringi'</span>,<span class='st'>'mapview'</span>,<span class='st'>'ggridges'</span>,<span class='st'>'networkD3'</span>,
+             <span class='st'>'htmlwidgets'</span><span class='op'>)</span>
+
+<span class='kw'>for</span><span class='op'>(</span><span class='va'>p</span> <span class='kw'>in</span> <span class='va'>packages</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='kw'>if</span><span class='op'>(</span><span class='op'>!</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'>p</span>, character.only <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+    <span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+  <span class='op'>}</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>p</span>, character.only <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<p><em>Reading the credit card and loyalty card details</em></p>
+<p>Importing credit card and loyalty card details into two separate data frames.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>cc</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv</span><span class='op'>(</span>file <span class='op'>=</span> <span class='st'>'data/cc_data.csv'</span><span class='op'>)</span>
+
+<span class='va'>lc</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv</span><span class='op'>(</span>file <span class='op'>=</span> <span class='st'>'data/loyalty_data.csv'</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p><em>Renaming foreign characters</em></p>
+<p>A single value under the location column has a non-english character hence replacing the foreign character with alternative english character.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>setDT</span><span class='op'>(</span><span class='va'>cc</span><span class='op'>)</span><span class='op'>[</span><span class='va'>location</span> <span class='op'>%like%</span> <span class='st'>"^Katerina"</span>, <span class='va'>location</span> <span class='op'>:=</span> <span class='st'>"Katerina's Cafe"</span><span class='op'>]</span>
+<span class='fu'>setDT</span><span class='op'>(</span><span class='va'>lc</span><span class='op'>)</span><span class='op'>[</span><span class='va'>location</span> <span class='op'>%like%</span> <span class='st'>"^Katerina"</span>, <span class='va'>location</span> <span class='op'>:=</span> <span class='st'>"Katerina's Cafe"</span><span class='op'>]</span>
+</code></pre>
+</div>
+</div>
+<p>View the columns of the dataset and their respective attributes.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>cc</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 1,490
+Columns: 4
+$ timestamp  &lt;chr&gt; &quot;01/06/2014 07:28&quot;, &quot;01/06/2014 07:34&quot;, &quot;01/06/20~
+$ location   &lt;chr&gt; &quot;Brew&#39;ve Been Served&quot;, &quot;Hallowed Grounds&quot;, &quot;Brew&#39;~
+$ price      &lt;dbl&gt; 11.34, 52.22, 8.33, 16.72, 4.24, 4.17, 28.73, 9.6~
+$ last4ccnum &lt;dbl&gt; 4795, 7108, 6816, 9617, 7384, 5368, 7253, 4948, 9~</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>lc</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 1,392
+Columns: 4
+$ timestamp  &lt;chr&gt; &quot;01/06/2014&quot;, &quot;01/06/2014&quot;, &quot;01/06/2014&quot;, &quot;01/06/~
+$ location   &lt;chr&gt; &quot;Brew&#39;ve Been Served&quot;, &quot;Brew&#39;ve Been Served&quot;, &quot;Ha~
+$ price      &lt;dbl&gt; 4.17, 9.60, 16.53, 11.51, 12.93, 4.27, 11.20, 15.~
+$ loyaltynum &lt;chr&gt; &quot;L2247&quot;, &quot;L9406&quot;, &quot;L8328&quot;, &quot;L6417&quot;, &quot;L1107&quot;, &quot;L40~</code></pre>
+</div>
+<p><em>Changing data type and extracting new columns</em></p>
+<p>It can be seen that the timestamp column is in character datatype. Hence, it is converted to timestamp format. After which day, hour and day of the week are extracted from the timestamp column. In addition, the ‘last4ccnum’ column in the credit card dataset is changed from integer format to character format.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>cc</span><span class='op'>$</span><span class='va'>timestamp</span> <span class='op'>&lt;-</span> <span class='fu'>date_time_parse</span><span class='op'>(</span><span class='va'>cc</span><span class='op'>$</span><span class='va'>timestamp</span>,
+                                zone <span class='op'>=</span> <span class='st'>""</span>,
+                                format <span class='op'>=</span> <span class='st'>"%m/%d/%Y %H:%M"</span><span class='op'>)</span>
+
+<span class='va'>lc</span><span class='op'>$</span><span class='va'>timestamp</span> <span class='op'>&lt;-</span> <span class='fu'>date_time_parse</span><span class='op'>(</span><span class='va'>lc</span><span class='op'>$</span><span class='va'>timestamp</span>,
+                                zone <span class='op'>=</span> <span class='st'>""</span>,
+                                format <span class='op'>=</span> <span class='st'>"%m/%d/%Y"</span><span class='op'>)</span>
+
+
+<span class='va'>cc</span> <span class='op'>&lt;-</span> <span class='va'>cc</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span><span class='op'>(</span>day <span class='op'>=</span> <span class='fu'>get_day</span><span class='op'>(</span><span class='va'>timestamp</span><span class='op'>)</span>,
+         hour <span class='op'>=</span> <span class='fu'>get_hour</span><span class='op'>(</span><span class='va'>timestamp</span><span class='op'>)</span>,
+         date <span class='op'>=</span> <span class='fu'>as_date</span><span class='op'>(</span><span class='va'>timestamp</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>lc</span> <span class='op'>&lt;-</span> <span class='va'>lc</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span><span class='op'>(</span>day <span class='op'>=</span> <span class='fu'>get_day</span><span class='op'>(</span><span class='va'>timestamp</span><span class='op'>)</span><span class='op'>)</span>
+
+
+<span class='va'>cc</span><span class='op'>$</span><span class='va'>dayofweek</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/weekday.POSIXt.html'>weekdays</a></span><span class='op'>(</span><span class='va'>cc</span><span class='op'>$</span><span class='va'>timestamp</span><span class='op'>)</span>
+
+<span class='va'>lc</span><span class='op'>$</span><span class='va'>dayofweek</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/weekday.POSIXt.html'>weekdays</a></span><span class='op'>(</span><span class='va'>lc</span><span class='op'>$</span><span class='va'>timestamp</span><span class='op'>)</span>
+
+<span class='va'>cc</span><span class='op'>$</span><span class='va'>last4ccnum</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>cc</span><span class='op'>$</span><span class='va'>last4ccnum</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p><em>Getting a glimpse after change</em></p>
+<p>View the columns of the dataset and their respective attributes after pre-processing.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>cc</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 1,490
+Columns: 8
+$ timestamp  &lt;dttm&gt; 2014-01-06 07:28:00, 2014-01-06 07:34:00, 2014-0~
+$ location   &lt;chr&gt; &quot;Brew&#39;ve Been Served&quot;, &quot;Hallowed Grounds&quot;, &quot;Brew&#39;~
+$ price      &lt;dbl&gt; 11.34, 52.22, 8.33, 16.72, 4.24, 4.17, 28.73, 9.6~
+$ last4ccnum &lt;chr&gt; &quot;4795&quot;, &quot;7108&quot;, &quot;6816&quot;, &quot;9617&quot;, &quot;7384&quot;, &quot;5368&quot;, &quot;~
+$ day        &lt;int&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6~
+$ hour       &lt;int&gt; 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7~
+$ date       &lt;date&gt; 2014-01-06, 2014-01-06, 2014-01-06, 2014-01-06, ~
+$ dayofweek  &lt;chr&gt; &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;,~</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>lc</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 1,392
+Columns: 6
+$ timestamp  &lt;dttm&gt; 2014-01-06, 2014-01-06, 2014-01-06, 2014-01-06, ~
+$ location   &lt;chr&gt; &quot;Brew&#39;ve Been Served&quot;, &quot;Brew&#39;ve Been Served&quot;, &quot;Ha~
+$ price      &lt;dbl&gt; 4.17, 9.60, 16.53, 11.51, 12.93, 4.27, 11.20, 15.~
+$ loyaltynum &lt;chr&gt; &quot;L2247&quot;, &quot;L9406&quot;, &quot;L8328&quot;, &quot;L6417&quot;, &quot;L1107&quot;, &quot;L40~
+$ day        &lt;int&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6~
+$ dayofweek  &lt;chr&gt; &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;,~</code></pre>
+</div>
+<p>Usually, the loyalty cards are used along with the credit cards to get some discounts and rewards but there is a mismatch between the total number of records between the credit card transactions (1490) and loyalty card transactions (1392).</p>
+<p>Getting the count of transactions made by the employees with credit cards and loyalty cards in order to find the most frequented and least frequented locations.</p>
 <h1 id="building-the-visualization">Building the visualization</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h1 id="task-1-1">Task 1</h1>
+<p><strong>Using just the credit and loyalty card data, identify the most popular locations, and when they are popular. What anomalies do you see? What corrections would you recommend to correct these anomalies?</strong></p>
+<p>All the data extraction, wrangling and preparing the input data required to perform the analysis are done in R using appropriate packages.</p>
+<p><em>Setting up the environment</em></p>
+<p>Firstly, it is important to install the necessary R packages and launch them into R Studio environment. The below code chunk checks for the available packages and installs those packages that are not available. In-addition to that, all those packages will be launched into RStudio environment.</p>
+<p>raster - To read, write, manipulate, analyze, model spatial data <br> sf - To support simple features and encode spatial vector data <br> tmap - To visualize spatial data distributions <br> tidyverse - A opinionated collection of R packages for data science <br> clock - Provides a comprehensive library for date-time manipulations <br> rgdal - Works on both raster and vector data types for manipulating geospatial data <br> tidytext - Makes text mining tasks easier, more effective and consistent <br> widyr - To widen the matrix, perform some processing, then turn back to tidy form <br> DT - To render data objects as HTML tables using JavaScript library <br> dplyr - A fast, consistent tool for working with data frame like objects <br> hms - To store and format time-of-day values <br> ggraph - An extension of ggplot2 for graph and network visualizations<br> igraph - For simple graphs and network analysis <br> crosstalk - To support linked brushing and filtering <br> plotly - To create interactive web graphics and custom interface <br> data.table - To handle data sets in R <br> stringi - For fast, correct, consistent, and convenient string/text manipulation <br> mapview - To create interactive visualizations of spatial data <br> ggridges - Used for visualizing changes in distributions over time <br> networkD3 - To create interactive network graphs with JavaScript <br> htmlwidgets - A framework for creating HTML widgets in R console <br></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>packages</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>'raster'</span>,<span class='st'>'sf'</span>,<span class='st'>'tmap'</span>,<span class='st'>'tidyverse'</span>,<span class='st'>'clock'</span>,<span class='st'>'rgdal'</span>,<span class='st'>'tidytext'</span>,<span class='st'>'widyr'</span>,
+             <span class='st'>'DT'</span>,<span class='st'>'dplyr'</span>,<span class='st'>'hms'</span>,<span class='st'>'ggraph'</span>,<span class='st'>'igraph'</span>,<span class='st'>'crosstalk'</span>,
+             <span class='st'>'plotly'</span>,<span class='st'>'data.table'</span>,<span class='st'>'stringi'</span>,<span class='st'>'mapview'</span>,<span class='st'>'ggridges'</span>,<span class='st'>'networkD3'</span>,
+             <span class='st'>'htmlwidgets'</span><span class='op'>)</span>
+
+<span class='kw'>for</span><span class='op'>(</span><span class='va'>p</span> <span class='kw'>in</span> <span class='va'>packages</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='kw'>if</span><span class='op'>(</span><span class='op'>!</span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>require</a></span><span class='op'>(</span><span class='va'>p</span>, character.only <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span><span class='op'>)</span><span class='op'>{</span>
+    <span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span><span class='va'>p</span><span class='op'>)</span>
+  <span class='op'>}</span>
+  <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'>p</span>, character.only <span class='op'>=</span> <span class='cn'>T</span><span class='op'>)</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+<p><em>Reading the credit card and loyalty card details</em></p>
+<p>Importing credit card and loyalty card details into two separate data frames.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>cc</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv</span><span class='op'>(</span>file <span class='op'>=</span> <span class='st'>'data/cc_data.csv'</span><span class='op'>)</span>
+
+<span class='va'>lc</span> <span class='op'>&lt;-</span> <span class='fu'>read_csv</span><span class='op'>(</span>file <span class='op'>=</span> <span class='st'>'data/loyalty_data.csv'</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p><em>Renaming foreign characters</em></p>
+<p>A single value under the location column has a non-english character hence replacing the foreign character with alternative english character.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>setDT</span><span class='op'>(</span><span class='va'>cc</span><span class='op'>)</span><span class='op'>[</span><span class='va'>location</span> <span class='op'>%like%</span> <span class='st'>"^Katerina"</span>, <span class='va'>location</span> <span class='op'>:=</span> <span class='st'>"Katerina's Cafe"</span><span class='op'>]</span>
+<span class='fu'>setDT</span><span class='op'>(</span><span class='va'>lc</span><span class='op'>)</span><span class='op'>[</span><span class='va'>location</span> <span class='op'>%like%</span> <span class='st'>"^Katerina"</span>, <span class='va'>location</span> <span class='op'>:=</span> <span class='st'>"Katerina's Cafe"</span><span class='op'>]</span>
+</code></pre>
+</div>
+</div>
+<p>View the columns of the dataset and their respective attributes.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>cc</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 1,490
+Columns: 4
+$ timestamp  &lt;chr&gt; &quot;01/06/2014 07:28&quot;, &quot;01/06/2014 07:34&quot;, &quot;01/06/20~
+$ location   &lt;chr&gt; &quot;Brew&#39;ve Been Served&quot;, &quot;Hallowed Grounds&quot;, &quot;Brew&#39;~
+$ price      &lt;dbl&gt; 11.34, 52.22, 8.33, 16.72, 4.24, 4.17, 28.73, 9.6~
+$ last4ccnum &lt;dbl&gt; 4795, 7108, 6816, 9617, 7384, 5368, 7253, 4948, 9~</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>lc</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 1,392
+Columns: 4
+$ timestamp  &lt;chr&gt; &quot;01/06/2014&quot;, &quot;01/06/2014&quot;, &quot;01/06/2014&quot;, &quot;01/06/~
+$ location   &lt;chr&gt; &quot;Brew&#39;ve Been Served&quot;, &quot;Brew&#39;ve Been Served&quot;, &quot;Ha~
+$ price      &lt;dbl&gt; 4.17, 9.60, 16.53, 11.51, 12.93, 4.27, 11.20, 15.~
+$ loyaltynum &lt;chr&gt; &quot;L2247&quot;, &quot;L9406&quot;, &quot;L8328&quot;, &quot;L6417&quot;, &quot;L1107&quot;, &quot;L40~</code></pre>
+</div>
+<p><em>Changing data type and extracting new columns</em></p>
+<p>It can be seen that the timestamp column is in character datatype. Hence, it is converted to timestamp format. After which day, hour and day of the week are extracted from the timestamp column. In addition, the ‘last4ccnum’ column in the credit card dataset is changed from integer format to character format.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>cc</span><span class='op'>$</span><span class='va'>timestamp</span> <span class='op'>&lt;-</span> <span class='fu'>date_time_parse</span><span class='op'>(</span><span class='va'>cc</span><span class='op'>$</span><span class='va'>timestamp</span>,
+                                zone <span class='op'>=</span> <span class='st'>""</span>,
+                                format <span class='op'>=</span> <span class='st'>"%m/%d/%Y %H:%M"</span><span class='op'>)</span>
+
+<span class='va'>lc</span><span class='op'>$</span><span class='va'>timestamp</span> <span class='op'>&lt;-</span> <span class='fu'>date_time_parse</span><span class='op'>(</span><span class='va'>lc</span><span class='op'>$</span><span class='va'>timestamp</span>,
+                                zone <span class='op'>=</span> <span class='st'>""</span>,
+                                format <span class='op'>=</span> <span class='st'>"%m/%d/%Y"</span><span class='op'>)</span>
+
+
+<span class='va'>cc</span> <span class='op'>&lt;-</span> <span class='va'>cc</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span><span class='op'>(</span>day <span class='op'>=</span> <span class='fu'>get_day</span><span class='op'>(</span><span class='va'>timestamp</span><span class='op'>)</span>,
+         hour <span class='op'>=</span> <span class='fu'>get_hour</span><span class='op'>(</span><span class='va'>timestamp</span><span class='op'>)</span>,
+         date <span class='op'>=</span> <span class='fu'>as_date</span><span class='op'>(</span><span class='va'>timestamp</span><span class='op'>)</span><span class='op'>)</span>
+
+<span class='va'>lc</span> <span class='op'>&lt;-</span> <span class='va'>lc</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>mutate</span><span class='op'>(</span>day <span class='op'>=</span> <span class='fu'>get_day</span><span class='op'>(</span><span class='va'>timestamp</span><span class='op'>)</span><span class='op'>)</span>
+
+
+<span class='va'>cc</span><span class='op'>$</span><span class='va'>dayofweek</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/weekday.POSIXt.html'>weekdays</a></span><span class='op'>(</span><span class='va'>cc</span><span class='op'>$</span><span class='va'>timestamp</span><span class='op'>)</span>
+
+<span class='va'>lc</span><span class='op'>$</span><span class='va'>dayofweek</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/weekday.POSIXt.html'>weekdays</a></span><span class='op'>(</span><span class='va'>lc</span><span class='op'>$</span><span class='va'>timestamp</span><span class='op'>)</span>
+
+<span class='va'>cc</span><span class='op'>$</span><span class='va'>last4ccnum</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='va'>cc</span><span class='op'>$</span><span class='va'>last4ccnum</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p><em>Getting a glimpse after change</em></p>
+<p>View the columns of the dataset and their respective attributes after pre-processing.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>cc</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 1,490
+Columns: 8
+$ timestamp  &lt;dttm&gt; 2014-01-06 07:28:00, 2014-01-06 07:34:00, 2014-0~
+$ location   &lt;chr&gt; &quot;Brew&#39;ve Been Served&quot;, &quot;Hallowed Grounds&quot;, &quot;Brew&#39;~
+$ price      &lt;dbl&gt; 11.34, 52.22, 8.33, 16.72, 4.24, 4.17, 28.73, 9.6~
+$ last4ccnum &lt;chr&gt; &quot;4795&quot;, &quot;7108&quot;, &quot;6816&quot;, &quot;9617&quot;, &quot;7384&quot;, &quot;5368&quot;, &quot;~
+$ day        &lt;int&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6~
+$ hour       &lt;int&gt; 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7~
+$ date       &lt;date&gt; 2014-01-06, 2014-01-06, 2014-01-06, 2014-01-06, ~
+$ dayofweek  &lt;chr&gt; &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;,~</code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'>glimpse</span><span class='op'>(</span><span class='va'>lc</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Rows: 1,392
+Columns: 6
+$ timestamp  &lt;dttm&gt; 2014-01-06, 2014-01-06, 2014-01-06, 2014-01-06, ~
+$ location   &lt;chr&gt; &quot;Brew&#39;ve Been Served&quot;, &quot;Brew&#39;ve Been Served&quot;, &quot;Ha~
+$ price      &lt;dbl&gt; 4.17, 9.60, 16.53, 11.51, 12.93, 4.27, 11.20, 15.~
+$ loyaltynum &lt;chr&gt; &quot;L2247&quot;, &quot;L9406&quot;, &quot;L8328&quot;, &quot;L6417&quot;, &quot;L1107&quot;, &quot;L40~
+$ day        &lt;int&gt; 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6~
+$ dayofweek  &lt;chr&gt; &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;, &quot;Monday&quot;,~</code></pre>
+</div>
+<p>Usually, the loyalty cards are used along with the credit cards to get some discounts and rewards but there is a mismatch between the total number of records between the credit card transactions (1490) and loyalty card transactions (1392).</p>
+<p>Getting the count of transactions made by the employees with credit cards and loyalty cards in order to find the most frequented and least frequented locations.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>cc_bar</span> <span class='op'>&lt;-</span> <span class='va'>cc</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>count</span><span class='op'>(</span><span class='va'>location</span>, sort<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+
+<span class='va'>lc_bar</span> <span class='op'>&lt;-</span> <span class='va'>lc</span> <span class='op'>%&gt;%</span>
+  <span class='fu'>count</span><span class='op'>(</span><span class='va'>location</span>, sort<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+</code></pre>
+</div>
+</div>
+<p><em>Plotting the most frequented and least frequented locations</em></p>
+<div class="layout-chunk" data-layout="l-page">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fig</span> <span class='op'>&lt;-</span> <span class='fu'>plot_ly</span><span class='op'>(</span><span class='va'>cc_bar</span>, x <span class='op'>=</span> <span class='op'>~</span><span class='va'>location</span>, y <span class='op'>=</span> <span class='op'>~</span><span class='va'>n</span>, type <span class='op'>=</span> <span class='st'>'bar'</span>, hoverinfo<span class='op'>=</span><span class='st'>"text"</span>, text <span class='op'>=</span> <span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>location</span>,<span class='st'>'&lt;/br&gt;&lt;/br&gt;'</span>, <span class='va'>n</span><span class='op'>)</span>,
+               marker <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='op'>~</span><span class='va'>n</span>,
+                             colorbar <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>'Visits'</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/graphics/layout.html'>layout</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Popular locations by credit card transactions"</span>,
+         xaxis <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Location"</span>, categoryarray <span class='op'>=</span> <span class='op'>~</span><span class='va'>location</span>, categoryorder <span class='op'>=</span> <span class='st'>"array"</span>, tickangle                <span class='op'>=</span> <span class='fl'>270</span><span class='op'>)</span>,
+         yaxis <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Visits"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>fig</span>
+</code></pre>
+</div>
+<div id="htmlwidget-e6b549ac4e7ab7a32f48" style="width:768px;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-e6b549ac4e7ab7a32f48">{"x":{"visdat":{"377c572adc0":["function () ","plotlyVisDat"]},"cur_data":"377c572adc0","attrs":{"377c572adc0":{"x":{},"y":{},"hoverinfo":"text","text":{},"marker":{"color":{},"colorbar":{"title":"Visits"}},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Popular locations by credit card transactions","xaxis":{"domain":[0,1],"automargin":true,"title":"Location","categoryarray":["Katerina's Cafe","Hippokampos","Guy's Gyros","Brew've Been Served","Hallowed Grounds","Ouzeri Elian","Abila Zacharo","Gelatogalore","Kalami Kafenion","Bean There Done That","Frydos Autosupply n' More","Coffee Cameleon","Jack's Magical Beans","Brewed Awakenings","Abila Airport","Albert's Fine Clothing","Nationwide Refinery","Shoppers' Delight","Carlyle Chemical Inc.","Stewart and Sons Fabrication","General Grocer","Kronos Mart","Chostus Hotel","Coffee Shack","Desafio Golf Course","Roberts and Sons","Ahaggo Museum","Kronos Pipe and Irrigation","Maximum Iron and Steel","Abila Scrapyard","Octavio's Office Supplies","Frank's Fuel","U-Pump","Daily Dealz"],"categoryorder":"array","tickangle":270,"type":"category"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Visits"},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["Katerina's Cafe","Hippokampos","Guy's Gyros","Brew've Been Served","Hallowed Grounds","Ouzeri Elian","Abila Zacharo","Gelatogalore","Kalami Kafenion","Bean There Done That","Frydos Autosupply n' More","Coffee Cameleon","Jack's Magical Beans","Brewed Awakenings","Abila Airport","Albert's Fine Clothing","Nationwide Refinery","Shoppers' Delight","Carlyle Chemical Inc.","Stewart and Sons Fabrication","General Grocer","Kronos Mart","Chostus Hotel","Coffee Shack","Desafio Golf Course","Roberts and Sons","Ahaggo Museum","Kronos Pipe and Irrigation","Maximum Iron and Steel","Abila Scrapyard","Octavio's Office Supplies","Frank's Fuel","U-Pump","Daily Dealz"],"y":[212,171,158,156,92,87,72,64,64,47,47,38,37,30,25,25,24,20,19,18,10,10,9,8,8,8,6,6,6,4,4,2,2,1],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"text":["Katerina's Cafe <\/br><\/br> 212","Hippokampos <\/br><\/br> 171","Guy's Gyros <\/br><\/br> 158","Brew've Been Served <\/br><\/br> 156","Hallowed Grounds <\/br><\/br> 92","Ouzeri Elian <\/br><\/br> 87","Abila Zacharo <\/br><\/br> 72","Gelatogalore <\/br><\/br> 64","Kalami Kafenion <\/br><\/br> 64","Bean There Done That <\/br><\/br> 47","Frydos Autosupply n' More <\/br><\/br> 47","Coffee Cameleon <\/br><\/br> 38","Jack's Magical Beans <\/br><\/br> 37","Brewed Awakenings <\/br><\/br> 30","Abila Airport <\/br><\/br> 25","Albert's Fine Clothing <\/br><\/br> 25","Nationwide Refinery <\/br><\/br> 24","Shoppers' Delight <\/br><\/br> 20","Carlyle Chemical Inc. <\/br><\/br> 19","Stewart and Sons Fabrication <\/br><\/br> 18","General Grocer <\/br><\/br> 10","Kronos Mart <\/br><\/br> 10","Chostus Hotel <\/br><\/br> 9","Coffee Shack <\/br><\/br> 8","Desafio Golf Course <\/br><\/br> 8","Roberts and Sons <\/br><\/br> 8","Ahaggo Museum <\/br><\/br> 6","Kronos Pipe and Irrigation <\/br><\/br> 6","Maximum Iron and Steel <\/br><\/br> 6","Abila Scrapyard <\/br><\/br> 4","Octavio's Office Supplies <\/br><\/br> 4","Frank's Fuel <\/br><\/br> 2","U-Pump <\/br><\/br> 2","Daily Dealz <\/br><\/br> 1"],"marker":{"color":[212,171,158,156,92,87,72,64,64,47,47,38,37,30,25,25,24,20,19,18,10,10,9,8,8,8,6,6,6,4,4,2,2,1],"colorbar":{"title":"Visits"},"line":{"color":"rgba(31,119,180,1)"}},"type":"bar","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="layout-chunk" data-layout="l-page">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>fig</span> <span class='op'>&lt;-</span> <span class='fu'>plot_ly</span><span class='op'>(</span><span class='va'>lc_bar</span>, x <span class='op'>=</span> <span class='op'>~</span><span class='va'>location</span>, y <span class='op'>=</span> <span class='op'>~</span><span class='va'>n</span>, type <span class='op'>=</span> <span class='st'>'bar'</span>, hoverinfo<span class='op'>=</span><span class='st'>"text"</span>, text <span class='op'>=</span> <span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span><span class='op'>(</span><span class='va'>location</span>,<span class='st'>'&lt;/br&gt;&lt;/br&gt;'</span>, <span class='va'>n</span><span class='op'>)</span>,
+               marker <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>color <span class='op'>=</span> <span class='op'>~</span><span class='va'>n</span>,
+                             colorbar <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>'Visits'</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='https://rdrr.io/r/graphics/layout.html'>layout</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Popular locations by loyalty card transactions"</span>,
+         xaxis <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Location"</span>, categoryarray <span class='op'>=</span> <span class='op'>~</span><span class='va'>location</span>, categoryorder <span class='op'>=</span> <span class='st'>"array"</span>, tickangle                <span class='op'>=</span> <span class='fl'>270</span><span class='op'>)</span>,
+         yaxis <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Visits"</span><span class='op'>)</span><span class='op'>)</span> 
+<span class='va'>fig</span>
+</code></pre>
+</div>
+<div id="htmlwidget-23dd13aa489f0a0ce52f" style="width:768px;height:576px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-23dd13aa489f0a0ce52f">{"x":{"visdat":{"377c15d85bd1":["function () ","plotlyVisDat"]},"cur_data":"377c15d85bd1","attrs":{"377c15d85bd1":{"x":{},"y":{},"hoverinfo":"text","text":{},"marker":{"color":{},"colorbar":{"title":"Visits"}},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"bar"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Popular locations by loyalty card transactions","xaxis":{"domain":[0,1],"automargin":true,"title":"Location","categoryarray":["Katerina's Cafe","Hippokampos","Guy's Gyros","Brew've Been Served","Ouzeri Elian","Hallowed Grounds","Abila Zacharo","Kalami Kafenion","Gelatogalore","Bean There Done That","Frydos Autosupply n' More","Coffee Cameleon","Jack's Magical Beans","Brewed Awakenings","Abila Airport","Albert's Fine Clothing","Nationwide Refinery","Carlyle Chemical Inc.","Shoppers' Delight","Stewart and Sons Fabrication","General Grocer","Coffee Shack","Chostus Hotel","Desafio Golf Course","Kronos Mart","Ahaggo Museum","Kronos Pipe and Irrigation","Maximum Iron and Steel","Roberts and Sons","Abila Scrapyard","Octavio's Office Supplies","Frank's Fuel","U-Pump"],"categoryorder":"array","tickangle":270,"type":"category"},"yaxis":{"domain":[0,1],"automargin":true,"title":"Visits"},"hovermode":"closest","showlegend":false},"source":"A","config":{"showSendToCloud":false},"data":[{"x":["Katerina's Cafe","Hippokampos","Guy's Gyros","Brew've Been Served","Ouzeri Elian","Hallowed Grounds","Abila Zacharo","Kalami Kafenion","Gelatogalore","Bean There Done That","Frydos Autosupply n' More","Coffee Cameleon","Jack's Magical Beans","Brewed Awakenings","Abila Airport","Albert's Fine Clothing","Nationwide Refinery","Carlyle Chemical Inc.","Shoppers' Delight","Stewart and Sons Fabrication","General Grocer","Coffee Shack","Chostus Hotel","Desafio Golf Course","Kronos Mart","Ahaggo Museum","Kronos Pipe and Irrigation","Maximum Iron and Steel","Roberts and Sons","Abila Scrapyard","Octavio's Office Supplies","Frank's Fuel","U-Pump"],"y":[195,155,146,140,84,80,71,66,60,45,42,37,35,29,26,25,23,19,18,17,12,9,8,8,8,6,6,6,6,4,3,2,1],"hoverinfo":["text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text","text"],"text":["Katerina's Cafe <\/br><\/br> 195","Hippokampos <\/br><\/br> 155","Guy's Gyros <\/br><\/br> 146","Brew've Been Served <\/br><\/br> 140","Ouzeri Elian <\/br><\/br> 84","Hallowed Grounds <\/br><\/br> 80","Abila Zacharo <\/br><\/br> 71","Kalami Kafenion <\/br><\/br> 66","Gelatogalore <\/br><\/br> 60","Bean There Done That <\/br><\/br> 45","Frydos Autosupply n' More <\/br><\/br> 42","Coffee Cameleon <\/br><\/br> 37","Jack's Magical Beans <\/br><\/br> 35","Brewed Awakenings <\/br><\/br> 29","Abila Airport <\/br><\/br> 26","Albert's Fine Clothing <\/br><\/br> 25","Nationwide Refinery <\/br><\/br> 23","Carlyle Chemical Inc. <\/br><\/br> 19","Shoppers' Delight <\/br><\/br> 18","Stewart and Sons Fabrication <\/br><\/br> 17","General Grocer <\/br><\/br> 12","Coffee Shack <\/br><\/br> 9","Chostus Hotel <\/br><\/br> 8","Desafio Golf Course <\/br><\/br> 8","Kronos Mart <\/br><\/br> 8","Ahaggo Museum <\/br><\/br> 6","Kronos Pipe and Irrigation <\/br><\/br> 6","Maximum Iron and Steel <\/br><\/br> 6","Roberts and Sons <\/br><\/br> 6","Abila Scrapyard <\/br><\/br> 4","Octavio's Office Supplies <\/br><\/br> 3","Frank's Fuel <\/br><\/br> 2","U-Pump <\/br><\/br> 1"],"marker":{"color":[195,155,146,140,84,80,71,66,60,45,42,37,35,29,26,25,23,19,18,17,12,9,8,8,8,6,6,6,6,4,3,2,1],"colorbar":{"title":"Visits"},"line":{"color":"rgba(31,119,180,1)"}},"type":"bar","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<p>By comparing both the bar plots by credit card and loyalty card transactions, the most popular locations are identified as Katerina’s Cafe, Hippokampos, Guy’s Gyros and Brew’ve Been Served. The fifth popular location is Hallowed Grounds according to the number of transactions made by credit card. But there is some anomaly in the usage of loyalty cards in this location as there are mismatches in total credit card transactions and total loyalty card transactions. The total number of credit card transactions in this location is 92 but the total number of loyalty card transactions is only 80. One suspicious transaction that can be observed from the above plot is at location Daily Dealz as there was only one recorded credit card transaction over the period of 14 days and also the loyalty card is not used in this particular location.</p>
+<p>Now plotting a heatmap to find out the most visited and least visited locations by hour of the day.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
