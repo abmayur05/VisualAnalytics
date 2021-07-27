@@ -5,6 +5,7 @@ description: |
 author:
   - name: Mayurapriyann Arulmozhi Baskaran
     url: https://www.linkedin.com/in/mayurapriyann/
+    affiliation: Singapore Management University
 date: 07-25-2021
 output:
   distill::distill_article:
@@ -913,6 +914,30 @@ Chostus hotel had one extreme outlier of 600 by credit card number ending with 5
 ![Chostus Hotel records from data table](img/18.jpg)
 
 </center>
+
+# References
+
+KU Leuven University submission for VAST Challenge 2014 
+(https://www.cs.umd.edu/hcil/varepository/VAST%20Challenge%202014/challenges/MC2%20-%20Patterns%20of%20Life%20Analysis/entries/KU%20Leuven/)
+
+Middlesex University submission for VAST Challenge 2014
+(https://www.cs.umd.edu/hcil/varepository/VAST%20Challenge%202014/challenges/MC2%20-%20Patterns%20of%20Life%20Analysis/entries/Middlesex%20University/)
+
+University of Buenos Aires - Tralice submission for VAST Challenge 2014
+(https://www.cs.umd.edu/hcil/varepository/VAST%20Challenge%202014/challenges/MC2%20-%20Patterns%20of%20Life%20Analysis/entries/University%20of%20Buenos%20Aires%20-%20Tralice/)
+
+VAST Challenge 2017:Mystery at the Wildlife Preserve
+(https://wiki.smu.edu.sg/1617t3isss608g1/ISSS608_2016-17_T3_Assign_GUAN_YIFEI)
+
+
+Modelling Geographical Accessibility by Prof.Kam <br>
+(https://rpubs.com/tskam/IS415-Hands-on_Ex10)
+
+Analysis of Property Prices on Airbnb Singapore by Huang Xiaoling
+(https://rpubs.com/xlhuang/646176)
+
+Visual Analytics Bechmark Repository
+(https://www.cs.umd.edu/hcil/varepository/VAST%20Challenge%202014/challenges/MC2%20-%20Patterns%20of%20Life%20Analysis/)
 
 <center>
 <font size="2">*This was written as part of requirements for the [Visual Analytics](https://wiki.smu.edu.sg/2021t2isss608/Course_information) course offered by [MITB](https://scis.smu.edu.sg/master-it-business).*</font size="2">
