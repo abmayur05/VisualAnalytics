@@ -1,7 +1,7 @@
 ---
-title: "About this blog"
+title: "Visual Analytics Blog Posts"
 description: |
-  Some additional details about the blog
+  The blog is completely created using R and Distill packages.
 ---
 
 ```{r setup, include=FALSE}

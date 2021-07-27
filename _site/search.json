@@ -2,18 +2,18 @@
   "articles": [
     {
       "path": "about.html",
-      "title": "About this blog",
-      "description": "Some additional details about the blog",
+      "title": "Visual Analytics Blog Posts",
+      "description": "The blog is completely created using R and Distill packages.",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2021-07-26T18:21:51+08:00"
+      "last_modified": "2021-07-27T15:46:05+08:00"
     },
     {
       "path": "index.html",
-      "title": "My Blog",
+      "title": "Visual Analytics Blog Posts",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2021-07-26T18:21:52+08:00"
+      "last_modified": "2021-07-27T15:46:33+08:00"
     }
   ],
   "collections": ["posts/posts.json"]
